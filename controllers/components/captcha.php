@@ -18,6 +18,11 @@
  * Version history
  *
  * 2012-03-29  DdP  Initial version
+ * 2012-03-30  DdP  - Rename __uniqueCode method to __randomCode
+ *                  - Add characters parameter to default configuration to
+ *                    specify number of characters to display in image.
+ *                  - Use characters configuration parameter for length in
+ *                    __randomCode method.
  *
  */
 class CaptchaComponent extends Object {
@@ -49,6 +54,7 @@ class CaptchaComponent extends Object {
         'height'     => 60,
         'rotate'     => false,
         'fontSize'   => 22,
+        'characters' => 6,
         'sessionKey' => 'Captcha.code'
     );
 
@@ -76,15 +82,14 @@ class CaptchaComponent extends Object {
     }
 
     /**
-     * Generate unique alphanumeric code
+     * Generate random alphanumeric code to specified character length
      *
-     * @param int $length The code length
      * @access private
      * @return string The generated code
      */
-    private function __uniqueCode($length = 6) {
-        $characters = 'abcdefghijklmnpqrstuvwxyz123456789';
-        return substr(str_shuffle($characters), 0, $length);
+    private function __randomCode() {
+        $valid = 'abcdefghijklmnpqrstuvwxyz123456789';
+        return substr(str_shuffle($valid), 0, $this->settings['characters']);
     }
 
     /**
@@ -95,7 +100,7 @@ class CaptchaComponent extends Object {
      * @return void
      */
     public function generate() {
-        $text = $this->__uniqueCode();
+        $text = $this->__randomCode();
 
         $width  = (int) $this->settings['width'];
         $height = (int) $this->settings['height'];
