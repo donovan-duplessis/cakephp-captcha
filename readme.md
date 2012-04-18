@@ -34,11 +34,17 @@ Copy the fonts into your framework at:
 
 ## Usage
 
-Include Captcha behavior in model: `public $actsAs = array('Captcha');`
+Include Captcha behavior in model:<br/>
 
-Include Captcha component in controller: `public $components = array('Captcha');`
+    public $actsAs = array('Captcha');
 
-To output the captcha image from controller: `$this->Captcha->generate();`
+Include Captcha component in controller:
+
+    public $components = array('Captcha');
+
+To output the captcha image from controller:
+
+    $this->Captcha->generate();
 
 ## Sample Code
 
@@ -98,8 +104,7 @@ View contacts/index.ctp
 
 ## License
 
-Licensed under The MIT License
-
+Licensed under The MIT License<br/>
 Redistributions of files must retain the above copyright notice.
 
 ## Copyright
