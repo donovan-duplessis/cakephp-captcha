@@ -10,6 +10,10 @@ Features:
 + The font size can be adjusted
 + Random monospace fonts are used during generation (anonymous, droidsans, ubuntu)
 
+## Website
+
+http://donovan-duplessis.github.com/cakephp-captcha
+
 ## Requirements
 
 + PHP version: 5.2+
@@ -113,11 +117,19 @@ Copyright (C) Donovan du Plessis, donodp@gmail.com
 
 ## Changelog
 
+### Controller
+
 ### 1.1
 
 * Rename __uniqueCode method to __randomCode
 * Use characters configuration parameter for length in __randomCode method
 * Add characters parameter to default configuration to specify number of characters to display in image
+
+### 1.0
+
+* Initial version
+
+### Behavior
 
 ### 1.0
 
