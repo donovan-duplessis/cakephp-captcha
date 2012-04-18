@@ -2,7 +2,7 @@
 /**
  * Contact Model
  *
- * Demonstrate Captcha validation
+ * Demonstrate Captcha validation via Behavior
  *
  * PHP version 5 and CakePHP version 1.3
  *
@@ -20,48 +20,17 @@ class Contact extends AppModel {
     public $useTable = false;
 
     /**
-     * Provide custom field validations for the Contact model
+     * Extend model with Captcha Behavior
      *
      * @var array
      * @access public
      */
-    public $validate = array(
-        'captcha' => array(
-            'rule' => array('verifyCaptcha'),
-            'message' => 'Captcha code value incorrect'
+    public $actsAs = array(
+        'Captcha' => array(
+            'field' => 'captcha',
+            'error' => 'Captcha code entered invalid'
         )
     );
-
-    /**
-     * Store the captcha text value
-     *
-     * @var string
-     * @access private
-     */
-    private $__captcha = null;
-
-    /**
-     * Custom validation rule to check if the entered captcha value is
-     * equal to the stored captcha value.
-     *
-     * @param array $check The array containing captcha field value
-     * @access public
-     * @return boolean True if the captcha values match
-     */
-    public function verifyCaptcha($check) {
-        return array_shift($check) == $this->__captcha;
-    }
-
-    /**
-     * Store captcha value (from session via controller)
-     *
-     * @param string $value The captcha value
-     * @access public
-     * @return void
-     */
-    public function setCaptcha($value) {
-        $this->__captcha = $value;
-    }
 
 }
 ?>
