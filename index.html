@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Cakephp-captcha by donovan-duplessis</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Cakephp-captcha</h1>
+        <p>Captcha implementation for CakePHP 1.3 (Behavior and Component)</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/donovan-duplessis/cakephp-captcha" class="button fork"><strong>Fork On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/donovan-duplessis/cakephp-captcha/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/donovan-duplessis/cakephp-captcha/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>Captcha implementation for CakePHP 1.3</h1>
+
+<p>Generates an image with random alphanumeric characters which requires a human to validate.  This is to prevent automated spam and spam bots.</p>
+
+<p>Features:</p>
+
+<ul>
+<li>Random alphanumeric text</li>
+<li>Supports rotation of text</li>
+<li>The image width and height dimensions can be set</li>
+<li>The font size can be adjusted</li>
+<li>Random monospace fonts are used during generation (anonymous, droidsans, ubuntu)</li>
+</ul><h2>Website</h2>
+
+<p><a href="http://donovan-duplessis.github.com/cakephp-captcha">http://donovan-duplessis.github.com/cakephp-captcha</a></p>
+
+<h2>Requirements</h2>
+
+<ul>
+<li>PHP version: 5.2+</li>
+<li>CakePHP version: 1.3</li>
+</ul><h2>Installation</h2>
+
+<p>Clone or download the component:</p>
+
+<pre><code>git clone git://github.com/donovan-duplessis/cakephp-captcha.git
+</code></pre>
+
+<p>Copy the component and behavior into your framework at:</p>
+
+<pre><code>cd cakephp-captcha
+cp controllers/components/captcha.php &lt;your-app&gt;/controllers/components/
+cp models/behaviors/captcha.php &lt;your-app&gt;/models/behaviors/
+</code></pre>
+
+<p>Copy the fonts into your framework at:</p>
+
+<pre><code>cp -R webroot/fonts &lt;your-app&gt;/webroot/
+chmod 755 &lt;your-app&gt;/webroot/fonts
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>Include Captcha behavior in model:<br></p>
+
+<pre><code>public $actsAs = array('Captcha');
+</code></pre>
+
+<p>Include Captcha component in controller:</p>
+
+<pre><code>public $components = array('Captcha');
+</code></pre>
+
+<p>To output the captcha image from controller:</p>
+
+<pre><code>$this-&gt;Captcha-&gt;generate();
+</code></pre>
+
+<h2>Sample Code</h2>
+
+<p>Model contact.php</p>
+
+<pre><code>&lt;?php
+class Contact extends AppModel {
+    public $actsAs = array(
+        'Captcha' =&gt; array(
+            'field' =&gt; 'captcha',
+            'error' =&gt; 'Captcha code entered invalid'
+        )
+    );
+}
+?&gt;
+</code></pre>
+
+<p>Controller contacts_controller.php</p>
+
+<pre><code>&lt;?php
+class ContactsController extends AppController {
+    public $components = array(
+        'Captcha' =&gt; array(
+            'rotate' =&gt; true
+        )
+    );
+
+    public function captcha()  {
+        $this-&gt;autoRender = false;
+        $this-&gt;Captcha-&gt;generate();
+    }
+
+    public function index() {
+        if ($this-&gt;RequestHandler-&gt;isPost()) {
+            $this-&gt;Contact-&gt;setCaptcha($this-&gt;Captcha-&gt;getCode());
+            $this-&gt;Contact-&gt;set($this-&gt;data);
+            if ($this-&gt;Contact-&gt;validates()) {
+                $this-&gt;Session-&gt;setFlash('Captcha code validated successfully',
+                    'flash_good');
+            }
+        }
+    }
+}
+?&gt;
+</code></pre>
+
+<p>Route config/routes.php</p>
+
+<pre><code>Router::connect('/img/captcha.jpg', array('controller' =&gt; 'contacts', 'action' =&gt; 'captcha'));
+</code></pre>
+
+<p>View contacts/index.ctp</p>
+
+<pre><code>&lt;?php
+    echo $this-&gt;Form-&gt;create('Contact');
+    echo $this-&gt;Html-&gt;image('captcha.jpg', array('style' =&gt; 'padding: 0.5%;'));
+    echo $this-&gt;Form-&gt;input('captcha');
+    echo $this-&gt;Form-&gt;end('Send');
+?&gt;
+</code></pre>
+
+<h2>License</h2>
+
+<p>Licensed under The MIT License<br>
+Redistributions of files must retain the above copyright notice.</p>
+
+<h2>Copyright</h2>
+
+<p>Copyright (C) Donovan du Plessis, donodp@gmail.com</p>
+
+<h2>Changelog</h2>
+
+<h3>Component</h3>
+
+<h3>1.1</h3>
+
+<ul>
+<li>Rename __uniqueCode method to __randomCode</li>
+<li>Use characters configuration parameter for length in __randomCode method</li>
+<li>Add characters parameter to default configuration to specify number of characters to display in image</li>
+</ul><h3>1.0</h3>
+
+<ul>
+<li>Initial version</li>
+</ul><h3>Behavior</h3>
+
+<h3>1.1</h3>
+
+<ul>
+<li>Extract default configuration settings into class variable</li>
+</ul><h3>1.0</h3>
+
+<ul>
+<li>Initial version</li>
+</ul>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/donovan-duplessis">donovan-duplessis</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    
+  </body>
+</html>
