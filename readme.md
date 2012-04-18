@@ -131,6 +131,10 @@ Copyright (C) Donovan du Plessis, donodp@gmail.com
 
 ### Behavior
 
+### 1.1
+
+* Extract default configuration settings into class variable
+
 ### 1.0
 
 * Initial version
