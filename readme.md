@@ -99,6 +99,7 @@ View contacts/index.ctp
 ## License
 
 Licensed under The MIT License
+
 Redistributions of files must retain the above copyright notice.
 
 ## Copyright
