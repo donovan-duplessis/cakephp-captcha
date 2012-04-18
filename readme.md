@@ -117,7 +117,7 @@ Copyright (C) Donovan du Plessis, donodp@gmail.com
 
 ## Changelog
 
-### Controller
+### Component
 
 ### 1.1
 
