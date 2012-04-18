@@ -10,7 +10,7 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @category    Behavior
- * @version     1.0
+ * @version     1.1
  * @author      Donovan du Plessis <donodp@gmail.com>
  * @copyright   Copyright (C) Donovan du Plessis
  * @license     MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -18,6 +18,7 @@
  * Version history
  *
  * 2012-04-18  DdP  Initial version
+ * 2012-04-19  DdP  Extract default configuration settings into class variable
  *
  */
 class CaptchaBehavior extends modelBehavior
@@ -30,6 +31,17 @@ class CaptchaBehavior extends modelBehavior
      * @access public
      */
     public $settings = array();
+
+    /**
+     * Default values to be merged with settings
+     *
+     * @var array
+     * @access private
+     */
+    private $__defaults = array(
+        'field' => 'captcha',
+        'error' => 'Captcha code value incorrect'
+    );
 
     /**
      * Core validation rules set on model
@@ -60,14 +72,11 @@ class CaptchaBehavior extends modelBehavior
      */
     public function setup(&$model, $settings = array()) {
         if (!isset($this->settings[$model->alias])) {
-            $this->settings[$model->alias] = array(
-                'field' => 'captcha',
-                'error' => 'Captcha code value incorrect'
-            );
+            $this->settings[$model->alias] = $this->__defaults;
         }
 
         $this->settings[$model->alias] = array_merge(
-            $this->settings[$model->alias], (array)$settings);
+            $this->settings[$model->alias], (array) $settings);
 
         $this->__rules[$model->alias] = $model->validate;
     }
