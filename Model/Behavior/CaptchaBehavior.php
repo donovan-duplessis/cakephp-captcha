@@ -21,7 +21,7 @@
  * 2012-04-19  DdP  Extract default configuration settings into class variable
  *
  */
-class CaptchaBehavior extends modelBehavior
+class CaptchaBehavior extends ModelBehavior
 {
 
     /**
