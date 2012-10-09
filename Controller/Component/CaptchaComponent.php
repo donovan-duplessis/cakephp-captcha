@@ -25,7 +25,7 @@
  *                    __randomCode method.
  *
  */
-class CaptchaComponent extends Object {
+class CaptchaComponent extends Component {
 
     /**
      * Other components used by this component

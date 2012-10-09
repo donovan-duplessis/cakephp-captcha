@@ -52,7 +52,7 @@ class ContactsController extends AppController {
     public function index() {
         if ($this->RequestHandler->isPost()) {
             $this->Contact->setCaptcha($this->Captcha->getCode());
-            $this->Contact->set($this->data);
+            $this->Contact->set($this->request->data);
             if ($this->Contact->validates()) {
                 $this->Session->setFlash('Captcha code validated successfully',
                     'flash_good');
