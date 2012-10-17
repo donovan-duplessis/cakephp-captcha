@@ -1,4 +1,4 @@
-# Captcha implementation for CakePHP 1.3
+# Captcha implementation for CakePHP 2.2
 
 Generates an image with random alphanumeric characters which requires a human to validate.  This is to prevent automated spam and spam bots.
 
@@ -17,7 +17,7 @@ http://donovan-duplessis.github.com/cakephp-captcha
 ## Requirements
 
 + PHP version: 5.2+
-+ CakePHP version: 1.3
++ CakePHP version: 2.0+
 
 ## Installation
 
@@ -115,9 +115,17 @@ Redistributions of files must retain the above copyright notice.
 
 Copyright (C) Donovan du Plessis, donodp@gmail.com
 
+## Contributors
+
+Adriano Luís Rocha, <driflash@gmail.com>
+
 ## Changelog
 
 ### Component
+
+### 1.2
+
+* Convert plugin to version 2.x of CakePHP Framework (Adriano Luís Rocha)
 
 ### 1.1
 

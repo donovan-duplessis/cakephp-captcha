@@ -4,13 +4,13 @@
  *
  * Component which generates a captcha image containing random texts
  *
- * PHP version 5 and CakePHP version 1.3
+ * PHP version 5 and CakePHP version 2.0+
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @category    Component
- * @version     1.1
+ * @version     1.2
  * @author      Donovan du Plessis <donodp@gmail.com>
  * @copyright   Copyright (C) Donovan du Plessis
  * @license     MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -23,6 +23,7 @@
  *                    specify number of characters to display in image.
  *                  - Use characters configuration parameter for length in
  *                    __randomCode method.
+ * 2012-10-09  ALR  Change class to extend Component (2.0 compliant)
  *
  */
 class CaptchaComponent extends Component {
