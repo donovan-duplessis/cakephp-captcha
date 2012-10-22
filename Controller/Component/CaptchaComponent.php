@@ -51,12 +51,12 @@ class CaptchaComponent extends Component {
      * @access private
      */
     private $__defaults = array(
-        'width'      => 120,
-        'height'     => 60,
-        'rotate'     => false,
-        'fontSize'   => 22,
-        'characters' => 6,
-        'sessionKey' => 'Captcha.code'
+            'width'      => 120,
+            'height'     => 60,
+            'rotate'     => false,
+            'fontSize'   => 22,
+            'characters' => 6,
+            'sessionKey' => 'Captcha.code'
     );
 
     /**
@@ -70,10 +70,12 @@ class CaptchaComponent extends Component {
     private $__fontTypes = array('anonymous', 'droidsans', 'ubuntu');
 
     /**
-     * (non-PHPdoc)
-     * @see Component::initialize()
+     * Constructor
+     *
+     * @param ComponentCollection $collection A ComponentCollection this component can use to lazy load its components
+     * @param array $settings Array of configuration settings.
      */
-    public function initialize(Controller $controller) {
+    public function __construct(ComponentCollection $collection, $settings = array()) {
         $this->settings = array_merge($this->__defaults, $settings);
     }
 
@@ -115,18 +117,18 @@ class CaptchaComponent extends Component {
         // Add random circle noise
         for ($i = 0; $i < ($width * $height) / 3; $i++) {
             imagefilledellipse($image, mt_rand(0, $width), mt_rand(0, $height),
-                mt_rand(0,3), mt_rand(0,3), $noiseColour);
+                    mt_rand(0,3), mt_rand(0,3), $noiseColour);
         }
 
         // Add random rectangle noise
         for ($i = 0; $i < ($width + $height) / 5; $i++) {
             imagerectangle($image, mt_rand(0,$width), mt_rand(0,$height),
-                mt_rand(0,$width), mt_rand(0,$height), $noiseColour);
+                    mt_rand(0,$width), mt_rand(0,$height), $noiseColour);
         }
 
         // Randomize font selection
         $font = sprintf("fonts%s%s.ttf", DIRECTORY_SEPARATOR,
-            $this->__fontTypes[array_rand($this->__fontTypes)]
+                $this->__fontTypes[array_rand($this->__fontTypes)]
         );
 
         // If specified, rotate text
@@ -140,7 +142,7 @@ class CaptchaComponent extends Component {
         $y = ($height - $box[5]) / 2;
 
         imagettftext($image, $this->settings['fontSize'], $angle, $x, $y,
-            $txtColour, $font, $text);
+                $txtColour, $font, $text);
 
         header("Content-type: image/jpeg");
         imagejpeg($image);

@@ -70,7 +70,7 @@ class CaptchaBehavior extends ModelBehavior
         }
 
         $this->settings[$model->alias] = array_merge(
-            $this->settings[$model->alias], (array) $settings);
+            $this->settings[$model->alias], (array) $config);
 
         $this->__rules[$model->alias] = $model->validate;
     }
