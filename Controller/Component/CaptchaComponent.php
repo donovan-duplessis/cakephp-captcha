@@ -70,15 +70,10 @@ class CaptchaComponent extends Component {
     private $__fontTypes = array('anonymous', 'droidsans', 'ubuntu');
 
     /**
-     * Called before the controller beforeFilter method.  Merge passed settings
-     * array with the default settings.
-     *
-     * @param object $controller Controller instance for the request
-     * @param array $settings Settings to set on the component
-     * @access public
-     * @return void
+     * (non-PHPdoc)
+     * @see Component::initialize()
      */
-    public function initialize(&$controller, $settings = array()) {
+    public function initialize(Controller $controller) {
         $this->settings = array_merge($this->__defaults, $settings);
     }
 
