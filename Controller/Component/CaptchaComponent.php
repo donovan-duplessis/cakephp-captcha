@@ -26,21 +26,22 @@
  * 2012-10-09  ALR  Change class to extend Component (2.0 compliant)
  *
  */
-class CaptchaComponent extends Component {
+App::uses('Component', 'Controller');
+
+class CaptchaComponent extends Component
+{
 
     /**
-     * Other components used by this component
+     * Other Components this component uses.
      *
      * @var array
-     * @access public
      */
     public $components = array('Session');
 
     /**
-     * Component configuration settings
+     * Settings for this Component
      *
      * @var array
-     * @access public
      */
     public $settings = array();
 
@@ -48,15 +49,14 @@ class CaptchaComponent extends Component {
      * Default values to be merged with settings
      *
      * @var array
-     * @access private
      */
     private $__defaults = array(
-            'width'      => 120,
-            'height'     => 60,
-            'rotate'     => false,
-            'fontSize'   => 22,
-            'characters' => 6,
-            'sessionKey' => 'Captcha.code'
+        'width'      => 120,
+        'height'     => 60,
+        'rotate'     => false,
+        'fontSize'   => 22,
+        'characters' => 6,
+        'sessionKey' => 'Captcha.code'
     );
 
     /**
@@ -65,7 +65,6 @@ class CaptchaComponent extends Component {
      * The font files (.ttf) are stored in app/webroot/fonts
      *
      * @var array
-     * @access private
      */
     private $__fontTypes = array('anonymous', 'droidsans', 'ubuntu');
 
@@ -75,8 +74,9 @@ class CaptchaComponent extends Component {
      * @param ComponentCollection $collection A ComponentCollection this component can use to lazy load its components
      * @param array $settings Array of configuration settings.
      */
-    public function __construct(ComponentCollection $collection, $settings = array()) {
-        $this->settings = array_merge($this->__defaults, $settings);
+    public function __construct(ComponentCollection $collection, $settings = array())
+    {
+        parent::__construct($collection, array_merge($this->__defaults, $settings));
     }
 
     /**
@@ -85,7 +85,8 @@ class CaptchaComponent extends Component {
      * @access private
      * @return string The generated code
      */
-    private function __randomCode() {
+    private function __randomCode()
+    {
         $valid = 'abcdefghijklmnpqrstuvwxyz123456789';
         return substr(str_shuffle($valid), 0, $this->settings['characters']);
     }
@@ -97,7 +98,8 @@ class CaptchaComponent extends Component {
      * @access public
      * @return void
      */
-    public function generate() {
+    public function generate()
+    {
         $text = $this->__randomCode();
 
         $width  = (int) $this->settings['width'];
@@ -115,13 +117,15 @@ class CaptchaComponent extends Component {
         $noiseColour = imagecolorallocate($image, 205, 205, 193);
 
         // Add random circle noise
-        for ($i = 0; $i < ($width * $height) / 3; $i++) {
+        for ($i = 0; $i < ($width * $height) / 3; $i++)
+        {
             imagefilledellipse($image, mt_rand(0, $width), mt_rand(0, $height),
                     mt_rand(0,3), mt_rand(0,3), $noiseColour);
         }
 
         // Add random rectangle noise
-        for ($i = 0; $i < ($width + $height) / 5; $i++) {
+        for ($i = 0; $i < ($width + $height) / 5; $i++)
+        {
             imagerectangle($image, mt_rand(0,$width), mt_rand(0,$height),
                     mt_rand(0,$width), mt_rand(0,$height), $noiseColour);
         }
@@ -133,7 +137,8 @@ class CaptchaComponent extends Component {
 
         // If specified, rotate text
         $angle = 0;
-        if($this->settings['rotate']) {
+        if($this->settings['rotate'])
+        {
             $angle = rand(-15, 15);
         }
 
@@ -144,11 +149,12 @@ class CaptchaComponent extends Component {
         imagettftext($image, $this->settings['fontSize'], $angle, $x, $y,
                 $txtColour, $font, $text);
 
+        $this->Session->delete($this->settings['sessionKey']);
+        $this->Session->write($this->settings['sessionKey'], $text);
+        
         header("Content-type: image/jpeg");
         imagejpeg($image);
         imagedestroy ($image);
-
-        $this->Session->write($this->settings['sessionKey'], $text);
     }
 
     /**
@@ -157,9 +163,9 @@ class CaptchaComponent extends Component {
      * @access public
      * @return string The generated captcha code text
      */
-    public function getCode()   {
+    public function getCode()
+    {
         return $this->Session->read($this->settings['sessionKey']);
     }
 
 }
-?>
