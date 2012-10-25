@@ -130,10 +130,13 @@ class CaptchaComponent extends Component
                     mt_rand(0,$width), mt_rand(0,$height), $noiseColour);
         }
 
+        // Gets full path to fonts dir
+        $fontsPath = dirname(dirname(dirname(__FILE__))) . DS . 'Lib' . DS . 'Fonts';
+
         // Randomize font selection
-        $font = sprintf("fonts%s%s.ttf", DIRECTORY_SEPARATOR,
-                $this->__fontTypes[array_rand($this->__fontTypes)]
-        );
+        $fontName = "{$this->__fontTypes[array_rand($this->__fontTypes)]}.ttf";
+        
+        $font = $fontsPath . DS . $fontName;
 
         // If specified, rotate text
         $angle = 0;
