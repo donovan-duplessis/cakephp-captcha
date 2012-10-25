@@ -22,6 +22,8 @@
  * 2012-10-09  ALR  Change class to extend ModelBehavior (2.0 compliant)
  *
  */
+App::uses('ModelBehavior', 'Model');
+
 class CaptchaBehavior extends ModelBehavior
 {
 
@@ -102,7 +104,7 @@ class CaptchaBehavior extends ModelBehavior
      * @access public
      * @return boolean True if the captcha values match
      */
-    public function verifyCaptcha(&$model, $check) {
+    public function verifyCaptcha(Model $model, $check) {
         return array_shift($check) == $this->__captcha;
     }
 
@@ -114,9 +116,8 @@ class CaptchaBehavior extends ModelBehavior
      * @access public
      * @return void
      */
-    public function setCaptcha(&$model, $value) {
-        $this->__captcha = $value;
+    public function setCaptcha(Model $model, $captcha) {
+        $this->__captcha = $captcha;
     }
 
 }
-?>
