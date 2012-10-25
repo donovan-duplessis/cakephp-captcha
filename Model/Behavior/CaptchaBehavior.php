@@ -61,36 +61,25 @@ class CaptchaBehavior extends ModelBehavior
     private $__captcha = null;
 
     /**
-     * Setup Behavior
-     *
-     * - Merge passed settings array with the default settings
-     * - Store original model validation rules
-     *
-     * @param object $model The model reference
-     * @param array $settings Settings to set on the behavior
-     * @access public
-     * @return void
+     * (non-PHPdoc)
+     * @see ModelBehavior::setup()
      */
-    public function setup(&$model, $settings = array()) {
+    public function setup(Model $model, $config = array()) {
         if (!isset($this->settings[$model->alias])) {
             $this->settings[$model->alias] = $this->__defaults;
         }
 
         $this->settings[$model->alias] = array_merge(
-            $this->settings[$model->alias], (array) $settings);
+            $this->settings[$model->alias], (array) $config);
 
         $this->__rules[$model->alias] = $model->validate;
     }
 
     /**
-     * Called before the model is validated.  Append custom captcha
-     * validation rule to the original model validation rules.
-     *
-     * @param object $model The model reference
-     * @access public
-     * @return void
+     * (non-PHPdoc)
+     * @see ModelBehavior::beforeValidate()
      */
-    public function beforeValidate(&$model) {
+    public function beforeValidate(Model $model) {
         $validator = array(
             'rule' => array('verifyCaptcha'),
             'message' => $this->settings[$model->alias]['error']

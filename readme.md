@@ -28,8 +28,8 @@ Clone or download the component:
 Copy the component and behavior into your framework at:
 
     cd cakephp-captcha
-    cp controllers/components/captcha.php <your-app>/controllers/components/
-    cp models/behaviors/captcha.php <your-app>/models/behaviors/
+    cp Controllers/Components/CaptchaComponent.php <your-app>/Controllers/Components/
+    cp Models/Behaviors/CaptchaBehavior.php <your-app>/Models/Behaviors/CaptchaBehavior.php
 
 Copy the fonts into your framework at:
 
@@ -52,9 +52,10 @@ To output the captcha image from controller:
 
 ## Sample Code
 
-Model contact.php
+Model Contact.php
 
     <?php
+    App::uses('AppModel', 'Model');
     class Contact extends AppModel {
         public $actsAs = array(
             'Captcha' => array(
@@ -65,9 +66,10 @@ Model contact.php
     }
     ?>
 
-Controller contacts_controller.php
+Controller ContactsController.php
 
     <?php
+    App::uses('AppController', 'Controller');
     class ContactsController extends AppController {
         public $components = array(
             'Captcha' => array(
@@ -93,11 +95,11 @@ Controller contacts_controller.php
     }
     ?>
 
-Route config/routes.php
+Route Config/routes.php
 
     Router::connect('/img/captcha.jpg', array('controller' => 'contacts', 'action' => 'captcha'));
 
-View contacts/index.ctp
+View Contacts/index.ctp
 
     <?php
         echo $this->Form->create('Contact');
