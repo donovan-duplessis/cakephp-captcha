@@ -62,14 +62,14 @@
 <p>Copy the component and behavior into your framework at:</p>
 
 <pre><code>cd cakephp-captcha
-cp controllers/components/captcha.php &lt;your-app&gt;/controllers/components/
-cp models/behaviors/captcha.php &lt;your-app&gt;/models/behaviors/
+cp Controllers/Components/CaptchaComponent.php &lt;your-app&gt;/Controllers/Components/
+cp Models/Behaviors/CaptchaBehavior.php &lt;your-app&gt;/Models/Behaviors/CaptchaBehavior.php
 </code></pre>
 
 <p>Copy the fonts into your framework at:</p>
 
-<pre><code>cp -R webroot/fonts &lt;your-app&gt;/webroot/
-chmod 755 &lt;your-app&gt;/webroot/fonts
+<pre><code>cp -R Lib/Fonts &lt;your-app&gt;/Lib/
+chmod 755 &lt;your-app&gt;/Lib/Fonts
 </code></pre>
 
 <h2>Usage</h2>
@@ -91,9 +91,10 @@ chmod 755 &lt;your-app&gt;/webroot/fonts
 
 <h2>Sample Code</h2>
 
-<p>Model contact.php</p>
+<p>Model Contact.php</p>
 
 <pre><code>&lt;?php
+App::uses('AppModel', 'Model');
 class Contact extends AppModel {
     public $actsAs = array(
         'Captcha' =&gt; array(
@@ -105,9 +106,10 @@ class Contact extends AppModel {
 ?&gt;
 </code></pre>
 
-<p>Controller contacts_controller.php</p>
+<p>Controller ContactsController.php</p>
 
 <pre><code>&lt;?php
+App::uses('AppController', 'Controller');
 class ContactsController extends AppController {
     public $components = array(
         'Captcha' =&gt; array(
@@ -134,12 +136,12 @@ class ContactsController extends AppController {
 ?&gt;
 </code></pre>
 
-<p>Route config/routes.php</p>
+<p>Route Config/routes.php</p>
 
 <pre><code>Router::connect('/img/captcha.jpg', array('controller' =&gt; 'contacts', 'action' =&gt; 'captcha'));
 </code></pre>
 
-<p>View contacts/index.ctp</p>
+<p>View Contacts/index.ctp</p>
 
 <pre><code>&lt;?php
     echo $this-&gt;Form-&gt;create('Contact');
@@ -166,7 +168,11 @@ Redistributions of files must retain the above copyright notice.</p>
 
 <h3>Component</h3>
 
-<h3>1.2</h3>
+<h3>1.3</h3>
+
+<ul>
+<li>Modify font directory path to /Lib/Fonts (Adriano Luís Rocha)</li>
+</ul><h3>1.2</h3>
 
 <ul>
 <li>Convert plugin to version 2.x of CakePHP Framework (Adriano Luís Rocha)</li>
@@ -182,7 +188,15 @@ Redistributions of files must retain the above copyright notice.</p>
 <li>Initial version</li>
 </ul><h3>Behavior</h3>
 
-<h3>1.1</h3>
+<h3>1.3</h3>
+
+<ul>
+<li>Access Model reference correctly (Adriano Luís Rocha)</li>
+</ul><h3>1.2</h3>
+
+<ul>
+<li>Change class to extend ModelBehavior - 2.0 compliant (Adriano Luís Rocha)</li>
+</ul><h3>1.1</h3>
 
 <ul>
 <li>Extract default configuration settings into class variable</li>
