@@ -10,7 +10,7 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @category    Behavior
- * @version     1.2
+ * @version     1.3
  * @author      Donovan du Plessis <donodp@gmail.com>
  * @copyright   Copyright (C) Donovan du Plessis
  * @license     MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -20,6 +20,7 @@
  * 2012-04-18  DdP  Initial version
  * 2012-04-19  DdP  Extract default configuration settings into class variable
  * 2012-10-09  ALR  Change class to extend ModelBehavior (2.0 compliant)
+ * 2012-10-25  ALR  Access Model reference correctly
  *
  */
 App::uses('ModelBehavior', 'Model');

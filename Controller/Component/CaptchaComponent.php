@@ -10,7 +10,7 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @category    Component
- * @version     1.2
+ * @version     1.3
  * @author      Donovan du Plessis <donodp@gmail.com>
  * @copyright   Copyright (C) Donovan du Plessis
  * @license     MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -24,6 +24,7 @@
  *                  - Use characters configuration parameter for length in
  *                    __randomCode method.
  * 2012-10-09  ALR  Change class to extend Component (2.0 compliant)
+ * 2012-10-25  ALR  Modify font directory path to <app>/Lib/Fonts
  *
  */
 App::uses('Component', 'Controller');
@@ -135,7 +136,7 @@ class CaptchaComponent extends Component
 
         // Randomize font selection
         $fontName = "{$this->__fontTypes[array_rand($this->__fontTypes)]}.ttf";
-        
+
         $font = $fontsPath . DS . $fontName;
 
         // If specified, rotate text
@@ -154,7 +155,7 @@ class CaptchaComponent extends Component
 
         $this->Session->delete($this->settings['sessionKey']);
         $this->Session->write($this->settings['sessionKey'], $text);
-        
+
         header("Content-type: image/jpeg");
         imagejpeg($image);
         imagedestroy ($image);

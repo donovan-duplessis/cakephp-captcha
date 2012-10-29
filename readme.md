@@ -33,8 +33,8 @@ Copy the component and behavior into your framework at:
 
 Copy the fonts into your framework at:
 
-    cp -R webroot/fonts <your-app>/webroot/
-    chmod 755 <your-app>/webroot/fonts
+    cp -R Lib/Fonts <your-app>/Lib/
+    chmod 755 <your-app>/Lib/Fonts
 
 ## Usage
 
@@ -125,6 +125,10 @@ Adriano Luís Rocha, <driflash@gmail.com>
 
 ### Component
 
+### 1.3
+
+* Modify font directory path to <app>/Lib/Fonts (Adriano Luís Rocha)
+
 ### 1.2
 
 * Convert plugin to version 2.x of CakePHP Framework (Adriano Luís Rocha)
@@ -140,6 +144,14 @@ Adriano Luís Rocha, <driflash@gmail.com>
 * Initial version
 
 ### Behavior
+
+### 1.3
+
+* Access Model reference correctly (Adriano Luís Rocha)
+
+### 1.2
+
+* Change class to extend ModelBehavior - 2.0 compliant (Adriano Luís Rocha)
 
 ### 1.1
 
