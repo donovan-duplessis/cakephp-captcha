@@ -2,7 +2,7 @@
 /**
  * Captcha Behavior
  *
- * Behavior which handles Captha verification
+ * Behavior which handles Captcha verification
  *
  * PHP version 5 and CakePHP version 2.0+
  *
@@ -11,7 +11,7 @@
  *
  * @category    Behavior
  * @version     1.3
- * @author      Donovan du Plessis <donodp@gmail.com>
+ * @author      Donovan du Plessis <donovan@binarytrooper.com>
  * @copyright   Copyright (C) Donovan du Plessis
  * @license     MIT License (http://www.opensource.org/licenses/mit-license.php)
  *

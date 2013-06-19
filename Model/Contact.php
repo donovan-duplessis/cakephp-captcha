@@ -7,7 +7,7 @@
  * PHP version 5 and CakePHP version 2.0+
  *
  * @category Model
- * @author   Donovan du Plessis <donodp@gmail.com>
+ * @author   Donovan du Plessis <donovan@binarytrooper.com>
  */
 class Contact extends AppModel {
 

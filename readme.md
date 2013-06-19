@@ -115,7 +115,7 @@ Redistributions of files must retain the above copyright notice.
 
 ## Copyright
 
-Copyright (C) Donovan du Plessis, donodp@gmail.com
+Copyright (C) Donovan du Plessis, donovan@binarytrooper.com
 
 ## Contributors
 
@@ -125,7 +125,7 @@ Adriano Luís Rocha, <driflash@gmail.com>
 
 ### Component
 
-### 1.4
+### 1.4 [June 19 2013]
 
 * Add initialize method to access controller response
 * Set response type and body via response object

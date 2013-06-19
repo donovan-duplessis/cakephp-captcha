@@ -7,7 +7,7 @@
  * PHP version 5 and CakePHP version 1.3
  *
  * @category Controller
- * @author   Donovan du Plessis <donodp@gmail.com>
+ * @author   Donovan du Plessis <donovan@binarytrooper.com>
  */
 class ContactsController extends AppController {
 

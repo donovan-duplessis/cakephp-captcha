@@ -11,7 +11,7 @@
  *
  * @category    Component
  * @version     1.4
- * @author      Donovan du Plessis <donodp@gmail.com>
+ * @author      Donovan du Plessis <donovan@binarytrooper.com>
  * @copyright   Copyright (C) Donovan du Plessis
  * @license     MIT License (http://www.opensource.org/licenses/mit-license.php)
  *
@@ -72,7 +72,7 @@ class CaptchaComponent extends Component
     /**
      * Default monospaced fonts available
      *
-     * The font files (.ttf) are stored in app/webroot/fonts
+     * The font files (.ttf) are stored in app/Lib/Fonts
      *
      * @var array
      */
