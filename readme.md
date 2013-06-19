@@ -28,13 +28,13 @@ Clone or download the component:
 Copy the component and behavior into your framework at:
 
     cd cakephp-captcha
-    cp Controllers/Components/CaptchaComponent.php <your-app>/Controllers/Components/
-    cp Models/Behaviors/CaptchaBehavior.php <your-app>/Models/Behaviors/CaptchaBehavior.php
+    cp Controller/Component/CaptchaComponent.php <your-app>/app/Controller/Component/
+    cp Model/Behavior/CaptchaBehavior.php <your-app>/app/Model/Behavior/
 
 Copy the fonts into your framework at:
 
-    cp -R Lib/Fonts <your-app>/Lib/
-    chmod 755 <your-app>/Lib/Fonts
+    cp -R Lib/Fonts <your-app>/app/Lib/
+    chmod 755 <your-app>/app/Lib/Fonts
 
 ## Usage
 
@@ -124,6 +124,11 @@ Adriano Luís Rocha, <driflash@gmail.com>
 ## Changelog
 
 ### Component
+
+### 1.4
+
+* Add initialize method to access controller response
+* Set response type and body via response object
 
 ### 1.3
 

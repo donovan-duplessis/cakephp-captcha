@@ -10,7 +10,7 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @category    Component
- * @version     1.3
+ * @version     1.4
  * @author      Donovan du Plessis <donodp@gmail.com>
  * @copyright   Copyright (C) Donovan du Plessis
  * @license     MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -25,6 +25,8 @@
  *                    __randomCode method.
  * 2012-10-09  ALR  Change class to extend Component (2.0 compliant)
  * 2012-10-25  ALR  Modify font directory path to <app>/Lib/Fonts
+ * 2013-06-19  DdP  - Add initialize method to access controller response
+ *                  - Set response type and body via response object
  *
  */
 App::uses('Component', 'Controller');
@@ -45,6 +47,13 @@ class CaptchaComponent extends Component
      * @var array
      */
     public $settings = array();
+
+    /**
+     * Response object
+     *
+     * @var CakeResponse
+     */
+    public $response;
 
     /**
      * Default values to be merged with settings
@@ -69,6 +78,15 @@ class CaptchaComponent extends Component
      */
     private $__fontTypes = array('anonymous', 'droidsans', 'ubuntu');
 
+    /**
+     * Initializes CaptchaComponent for use in the controller
+     *
+     * @param Controller $controller A reference to the instantiating controller object
+     * @return void
+     */
+    public function initialize(Controller $controller) {
+        $this->response = $controller->response;
+    }
     /**
      * Constructor
      *
@@ -156,9 +174,9 @@ class CaptchaComponent extends Component
         $this->Session->delete($this->settings['sessionKey']);
         $this->Session->write($this->settings['sessionKey'], $text);
 
-        header("Content-type: image/jpeg");
-        imagejpeg($image);
-        imagedestroy ($image);
+        $this->response->type('jpg');
+        $this->response->body(imagejpeg($image));
+        $this->response->disableCache();
     }
 
     /**
