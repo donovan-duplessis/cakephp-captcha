@@ -1,4 +1,4 @@
-# Captcha implementation for CakePHP 2.2
+# Captcha support for CakePHP 2.2+
 
 Generates an image with random alphanumeric characters which requires a human to validate.  This is to prevent automated spam and spam bots.
 
@@ -56,7 +56,7 @@ Refer to sample code (mostly in contacts index view) which refreshes the captcha
 
 ## Authentication
 
-If you are using the authentication component, ensure that the captcha action (that generates the image) is granted access
+If you are using the authentication component, ensure that the captcha action (that generates the image) is granted access.
 
 ## Sample Code
 
@@ -127,7 +127,7 @@ Copyright (C) Donovan du Plessis, donovan@binarytrooper.com
 
 ## Contributors
 
-Adriano Luís Rocha, <driflash@gmail.com>
+Adriano Luís Rocha (ALR), [adrianlouis](https://github.com/adrianoluis)
 
 ## Changelog
 
@@ -135,15 +135,15 @@ Adriano Luís Rocha, <driflash@gmail.com>
 * Add reload captcha image implementation to contacts sample code
 
 ##### 1.4 [Jun 19, 2013]
-* Add initialize method to component to set correct image response type+body
+* Add initialize method to component to set correct image response type and body
 * Refactor readme document and script comments
 
 ##### 1.3 [Oct 25, 2012]
-* Set font path to Lib/Fonts (Adriano Luís Rocha)
-* Access Model reference correctly in Behavior (Adriano Luís Rocha)
+* Set font path to Lib/Fonts (ALR)
+* Access Model reference correctly in Behavior (ALR)
 
 ##### 1.2 [Oct 17, 2012]
-* Set component and behavior to framework 2.0 compliant (Adriano Luís Rocha)
+* Set component and behavior to framework 2.0 compliant (ALR)
 
 ##### 1.1 [Apr 18, 2012]
 * Add character limit configuration to component
