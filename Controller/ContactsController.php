@@ -4,7 +4,7 @@
  *
  * Demonstrate use of the Captcha Component
  *
- * PHP version 5 and CakePHP version 1.3
+ * PHP version 5 and CakePHP version 2.0+
  *
  * @category Controller
  * @author   Donovan du Plessis <donovan@binarytrooper.com>
@@ -30,6 +30,16 @@ class ContactsController extends AppController {
             'rotate' => true
         ),
         'RequestHandler'
+    );
+
+    /**
+     * Helpers
+     *
+     * @var array
+     * @access public
+     */
+    public $helpers = array(
+        'Js' => array('Jquery')
     );
 
     /**
