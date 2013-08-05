@@ -12,7 +12,7 @@ Features:
 
 ## Website
 
-http://donovan-duplessis.github.com/cakephp-captcha
+[captcha.baselocker.com](http://captcha.baselocker.com)
 
 ## Requirements
 
@@ -123,45 +123,24 @@ Adriano Luís Rocha, <driflash@gmail.com>
 
 ## Changelog
 
-### Component
+##### 1.5 [Jun 20, 2013]
+* Add reload captcha image implementation to contacts sample code
 
-### 1.4 [June 19 2013]
+##### 1.4 [Jun 19, 2013]
+* Add initialize method to component to set correct image response type+body
+* Refactor readme document and script comments
 
-* Add initialize method to access controller response
-* Set response type and body via response object
+##### 1.3 [Oct 25, 2012]
+* Set font path to Lib/Fonts (Adriano Luís Rocha)
+* Access Model reference correctly in Behavior (Adriano Luís Rocha
 
-### 1.3
+##### 1.2 [Oct 17, 2012]
+* Set component and behavior to framework 2.0 compliant (Adriano Luís Rocha)
 
-* Modify font directory path to <app>/Lib/Fonts (Adriano Luís Rocha)
+##### 1.1 [Apr 18, 2012]
+* Add character limit configuration to component
+* Initial default configuration settings in Behavior
+* Refactor code and readme document
 
-### 1.2
-
-* Convert plugin to version 2.x of CakePHP Framework (Adriano Luís Rocha)
-
-### 1.1
-
-* Rename __uniqueCode method to __randomCode
-* Use characters configuration parameter for length in __randomCode method
-* Add characters parameter to default configuration to specify number of characters to display in image
-
-### 1.0
-
-* Initial version
-
-### Behavior
-
-### 1.3
-
-* Access Model reference correctly (Adriano Luís Rocha)
-
-### 1.2
-
-* Change class to extend ModelBehavior - 2.0 compliant (Adriano Luís Rocha)
-
-### 1.1
-
-* Extract default configuration settings into class variable
-
-### 1.0
-
-* Initial version
+##### 1.0 [Mar 29, 2012]
+* Initial Version
