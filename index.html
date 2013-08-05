@@ -1,37 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Cakephp-captcha : Captcha implementation for CakePHP 2.2 (Behavior and Component)" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Cakephp-captcha by donovan-duplessis</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Cakephp-captcha</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
+    <div class="wrapper">
+      <header>
+        <h1>Cakephp-captcha</h1>
+        <p>Captcha implementation for CakePHP 2.2+</p>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/donovan-duplessis/cakephp-captcha">View on GitHub</a>
+        <p class="view"><a href="https://github.com/donovan-duplessis/cakephp-captcha">View the Project on GitHub <small>donovan-duplessis/cakephp-captcha</small></a></p>
 
-          <h1 id="project_title">Cakephp-captcha</h1>
-          <h2 id="project_tagline">Captcha implementation for CakePHP 2.2 (Behavior and Component)</h2>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/donovan-duplessis/cakephp-captcha/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/donovan-duplessis/cakephp-captcha/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>Captcha implementation for CakePHP 2.2</h1>
+        <ul>
+          <li><a href="https://github.com/donovan-duplessis/cakephp-captcha/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/donovan-duplessis/cakephp-captcha/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/donovan-duplessis/cakephp-captcha">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="captcha-implementation-for-cakephp-22" class="anchor" href="#captcha-implementation-for-cakephp-22"><span class="octicon octicon-link"></span></a>Captcha implementation for CakePHP 2.2+</h1>
 
 <p>Generates an image with random alphanumeric characters which requires a human to validate.  This is to prevent automated spam and spam bots.</p>
 
@@ -43,16 +41,19 @@
 <li>The image width and height dimensions can be set</li>
 <li>The font size can be adjusted</li>
 <li>Random monospace fonts are used during generation (anonymous, droidsans, ubuntu)</li>
-</ul><h2>Website</h2>
+</ul><h2>
+<a name="website" class="anchor" href="#website"><span class="octicon octicon-link"></span></a>Website</h2>
 
-<p><a href="http://donovan-duplessis.github.com/cakephp-captcha">http://donovan-duplessis.github.com/cakephp-captcha</a></p>
+<p><a href="http://captcha.baselocker.com">captcha.baselocker.com</a></p>
 
-<h2>Requirements</h2>
+<h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
 <ul>
 <li>PHP version: 5.2+</li>
 <li>CakePHP version: 2.0+</li>
-</ul><h2>Installation</h2>
+</ul><h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>Clone or download the component:</p>
 
@@ -62,17 +63,18 @@
 <p>Copy the component and behavior into your framework at:</p>
 
 <pre><code>cd cakephp-captcha
-cp Controllers/Components/CaptchaComponent.php &lt;your-app&gt;/Controllers/Components/
-cp Models/Behaviors/CaptchaBehavior.php &lt;your-app&gt;/Models/Behaviors/CaptchaBehavior.php
+cp Controller/Component/CaptchaComponent.php &lt;your-app&gt;/app/Controller/Component/
+cp Model/Behavior/CaptchaBehavior.php &lt;your-app&gt;/app/Model/Behavior/
 </code></pre>
 
 <p>Copy the fonts into your framework at:</p>
 
-<pre><code>cp -R Lib/Fonts &lt;your-app&gt;/Lib/
-chmod 755 &lt;your-app&gt;/Lib/Fonts
+<pre><code>cp -R Lib/Fonts &lt;your-app&gt;/app/Lib/
+chmod 755 &lt;your-app&gt;/app/Lib/Fonts
 </code></pre>
 
-<h2>Usage</h2>
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <p>Include Captcha behavior in model:<br></p>
 
@@ -89,7 +91,18 @@ chmod 755 &lt;your-app&gt;/Lib/Fonts
 <pre><code>$this-&gt;Captcha-&gt;generate();
 </code></pre>
 
-<h2>Sample Code</h2>
+<h2>
+<a name="reload-image" class="anchor" href="#reload-image"><span class="octicon octicon-link"></span></a>Reload image</h2>
+
+<p>Refer to sample code (mostly in contacts index view) which refreshes the captcha image via jQuery.</p>
+
+<h2>
+<a name="authentication" class="anchor" href="#authentication"><span class="octicon octicon-link"></span></a>Authentication</h2>
+
+<p>If you are using the authentication component, ensure that the captcha action (that generates the image) is granted access</p>
+
+<h2>
+<a name="sample-code" class="anchor" href="#sample-code"><span class="octicon octicon-link"></span></a>Sample Code</h2>
 
 <p>Model Contact.php</p>
 
@@ -151,72 +164,67 @@ class ContactsController extends AppController {
 ?&gt;
 </code></pre>
 
-<h2>License</h2>
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>Licensed under The MIT License<br>
 Redistributions of files must retain the above copyright notice.</p>
 
-<h2>Copyright</h2>
+<h2>
+<a name="copyright" class="anchor" href="#copyright"><span class="octicon octicon-link"></span></a>Copyright</h2>
 
-<p>Copyright (C) Donovan du Plessis, <a href="mailto:donodp@gmail.com">donodp@gmail.com</a></p>
+<p>Copyright (C) Donovan du Plessis, <a href="mailto:donovan@binarytrooper.com">donovan@binarytrooper.com</a></p>
 
-<h2>Contributors</h2>
+<h2>
+<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
 
 <p>Adriano Luís Rocha, <a href="mailto:driflash@gmail.com">driflash@gmail.com</a></p>
 
-<h2>Changelog</h2>
+<h2>
+<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>Changelog</h2>
 
-<h3>Component</h3>
-
-<h3>1.3</h3>
-
-<ul>
-<li>Modify font directory path to /Lib/Fonts (Adriano Luís Rocha)</li>
-</ul><h3>1.2</h3>
+<h5>
+<a name="15-aug-05-2013" class="anchor" href="#15-aug-05-2013"><span class="octicon octicon-link"></span></a>1.5 [Aug 05, 2013]</h5>
 
 <ul>
-<li>Convert plugin to version 2.x of CakePHP Framework (Adriano Luís Rocha)</li>
-</ul><h3>1.1</h3>
+<li>Add reload captcha image implementation to contacts sample code</li>
+</ul><h5>
+<a name="14-jun-19-2013" class="anchor" href="#14-jun-19-2013"><span class="octicon octicon-link"></span></a>1.4 [Jun 19, 2013]</h5>
 
 <ul>
-<li>Rename __uniqueCode method to __randomCode</li>
-<li>Use characters configuration parameter for length in __randomCode method</li>
-<li>Add characters parameter to default configuration to specify number of characters to display in image</li>
-</ul><h3>1.0</h3>
+<li>Add initialize method to component to set correct image response type+body</li>
+<li>Refactor readme document and script comments</li>
+</ul><h5>
+<a name="13-oct-25-2012" class="anchor" href="#13-oct-25-2012"><span class="octicon octicon-link"></span></a>1.3 [Oct 25, 2012]</h5>
 
 <ul>
-<li>Initial version</li>
-</ul><h3>Behavior</h3>
-
-<h3>1.3</h3>
-
-<ul>
-<li>Access Model reference correctly (Adriano Luís Rocha)</li>
-</ul><h3>1.2</h3>
+<li>Set font path to Lib/Fonts (Adriano Luís Rocha)</li>
+<li>Access Model reference correctly in Behavior (Adriano Luís Rocha)</li>
+</ul><h5>
+<a name="12-oct-17-2012" class="anchor" href="#12-oct-17-2012"><span class="octicon octicon-link"></span></a>1.2 [Oct 17, 2012]</h5>
 
 <ul>
-<li>Change class to extend ModelBehavior - 2.0 compliant (Adriano Luís Rocha)</li>
-</ul><h3>1.1</h3>
+<li>Set component and behavior to framework 2.0 compliant (Adriano Luís Rocha)</li>
+</ul><h5>
+<a name="11-apr-18-2012" class="anchor" href="#11-apr-18-2012"><span class="octicon octicon-link"></span></a>1.1 [Apr 18, 2012]</h5>
 
 <ul>
-<li>Extract default configuration settings into class variable</li>
-</ul><h3>1.0</h3>
+<li>Add character limit configuration to component</li>
+<li>Initial default configuration settings in Behavior</li>
+<li>Refactor code and readme document</li>
+</ul><h5>
+<a name="10-mar-29-2012" class="anchor" href="#10-mar-29-2012"><span class="octicon octicon-link"></span></a>1.0 [Mar 29, 2012]</h5>
 
 <ul>
-<li>Initial version</li>
+<li>Initial Version</li>
 </ul>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Cakephp-captcha maintained by <a href="https://github.com/donovan-duplessis">donovan-duplessis</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/donovan-duplessis">donovan-duplessis</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
-
+    <script src="javascripts/scale.fix.js"></script>
     
-
   </body>
 </html>
