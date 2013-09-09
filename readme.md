@@ -36,6 +36,22 @@ Copy the fonts into your framework at:
     cp -R Lib/Fonts <your-app>/app/Lib/
     chmod 755 <your-app>/app/Lib/Fonts
 
+GD library needs to be installed for PHP (for dynamic image creation):
+
+Ubuntu
+
+    sudo apt-get install php5-gd
+
+Mac OSX (MacPorts)
+
+    sudo port install php5-gd
+
+## Errors
+
+e.g. "Call to undefined function imagecreatetruecolor ()"
+
+Install php5-gd library as described above
+
 ## Usage
 
 Include Captcha behavior in model:<br/>
