@@ -84,7 +84,7 @@ Model Contact.php
     class Contact extends AppModel {
         public $actsAs = array(
             'Captcha' => array(
-                'field' => 'captcha',
+                'field' => array('captcha', 'captcha-2'),
                 'error' => 'Captcha code entered invalid'
             )
         );
@@ -137,15 +137,10 @@ View Contacts/index.ctp
 
     <?php
         echo $this->Form->create('Contact');
-        echo $this->Html->image('captcha.jpg', array('style' => 'padding: 0.5%;'));
-        echo $this->Form->input('captcha');
-        echo $this->Form->end('Send');
-
-        echo $this->Form->create('Contact');
-        foreach($captcha_fields as $captcha) {
+        foreach($captcha_fields as $index => $captcha) {
             echo $this->Html->image($captcha . '.jpg', array('id' => $captcha));
             echo $this->Html->link('reload image &#x21bb;', '#', array('class' => 'reload', 'escape' => false));
-            echo $this->Form->input($captcha, array('label' => 'Captcha', 'value' => ''));
+            echo $this->Form->input($captcha, array('label' => 'Captcha', 'value' => '', 'tabindex' => $index + 1)); 
         }
         echo $this->Form->end('Submit');
     ?>

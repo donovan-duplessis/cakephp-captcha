@@ -20,10 +20,10 @@
 <?php
     echo $this->Form->create('Contact');
     echo $this->Form->inputs(array('legend' => '* Now supports multiple captchas per form'));
-    foreach($captcha_fields as $captcha) {
+    foreach($captcha_fields as $index => $captcha) {
         echo $this->Html->image($captcha . '.jpg', array('id' => $captcha));
         echo $this->Html->link('reload image &#x21bb;', '#', array('class' => 'reload', 'escape' => false));
-        echo $this->Form->input($captcha, array('label' => 'Captcha', 'value' => ''));
+        echo $this->Form->input($captcha, array('label' => 'Captcha', 'value' => '', 'tabindex' => $index + 1));
 
     }
     echo $this->Form->end('Submit');
