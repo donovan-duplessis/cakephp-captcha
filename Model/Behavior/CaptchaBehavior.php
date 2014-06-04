@@ -10,7 +10,7 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @category    Behavior
- * @version     1.3
+ * @version     1.4
  * @author      Donovan du Plessis <donovan@binarytrooper.com>
  * @copyright   Copyright (C) Donovan du Plessis
  * @license     MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -21,6 +21,7 @@
  * 2012-04-19  DdP  Extract default configuration settings into class variable
  * 2012-10-09  ALR  Change class to extend ModelBehavior (2.0 compliant)
  * 2012-10-25  ALR  Access Model reference correctly
+ * 2014-06-04  Ddp  Add support for multiple captcha instantiations
  *
  */
 App::uses('ModelBehavior', 'Model');
@@ -37,13 +38,21 @@ class CaptchaBehavior extends ModelBehavior
     public $settings = array();
 
     /**
+     * Initialized Captchas
+     *
+     * @var array
+     * @access public
+     */
+    public $captchas = array();
+
+    /**
      * Default values to be merged with settings
      *
      * @var array
      * @access private
      */
     private $__defaults = array(
-        'field' => 'captcha',
+        'field' => array('captcha'),
         'error' => 'Captcha code value incorrect'
     );
 
@@ -88,12 +97,17 @@ class CaptchaBehavior extends ModelBehavior
             'message' => $this->settings[$model->alias]['error']
         );
 
-        $model->validate = array_merge(
-            $this->__rules[$model->alias],
-            array(
-                $this->settings[$model->alias]['field'] => $validator
-            )
-        );
+        $original_fields = $this->settings[$model->alias]['field'];
+        $fields = array();
+        $fields = is_array($original_fields) ?
+            $original_fields : array($original_fields);
+
+        $rules = array();
+        foreach ($fields as $field) {
+            $rules[$field] = $validator;
+        }
+
+        $model->validate = array_merge($this->__rules[$model->alias], $rules);
     }
 
     /**
@@ -106,7 +120,8 @@ class CaptchaBehavior extends ModelBehavior
      * @return boolean True if the captcha values match
      */
     public function verifyCaptcha(Model $model, $check) {
-        return array_shift($check) == $this->__captcha;
+        $field = key($check);
+        return $check[$field] == $this->captchas[$field];
     }
 
     /**
@@ -117,8 +132,8 @@ class CaptchaBehavior extends ModelBehavior
      * @access public
      * @return void
      */
-    public function setCaptcha(Model $model, $captcha) {
-        $this->__captcha = $captcha;
+    public function setCaptcha(Model $model, $field, $captcha) {
+        $this->captchas[$field] = $captcha;
     }
 
 }

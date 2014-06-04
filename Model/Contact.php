@@ -27,7 +27,7 @@ class Contact extends AppModel {
      */
     public $actsAs = array(
         'Captcha' => array(
-            'field' => 'captcha',
+            'field' => array('captcha', 'captcha-2'),
             'error' => 'Captcha code entered invalid'
         )
     );

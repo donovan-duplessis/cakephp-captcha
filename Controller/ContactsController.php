@@ -43,14 +43,23 @@ class ContactsController extends AppController {
     );
 
     /**
+     * Captcha field definitions
+     *
+     * @var array
+     * @access public
+     */
+    public $captchas = array('captcha', 'captcha-2');
+
+    /**
      * Generate and render captcha image
      *
      * @access public
      * @return void
      */
-    public function captcha()  {
+    public function captcha() {
         $this->autoRender = false;
-        $this->Captcha->generate();
+        $captcha = basename($this->params['url']['url'], '.jpg');
+        $this->Captcha->generate($captcha);
     }
 
     /**
@@ -61,13 +70,17 @@ class ContactsController extends AppController {
      */
     public function index() {
         if ($this->RequestHandler->isPost()) {
-            $this->Contact->setCaptcha($this->Captcha->getCode());
+            foreach($this->captchas as $field) {
+                $this->Contact->setCaptcha($field,
+                    $this->Captcha->getCode($field));
+            };
             $this->Contact->set($this->request->data);
             if ($this->Contact->validates()) {
-                $this->Session->setFlash('Captcha code validated successfully',
+                $this->Session->setFlash('Captcha codes validated successfully',
                     'flash_good');
             }
         }
+        $this->set('captcha_fields', $this->captchas);
     }
 
 }

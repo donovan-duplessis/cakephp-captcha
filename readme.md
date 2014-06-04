@@ -9,8 +9,9 @@ Features:
 + The image width and height dimensions can be set
 + The font size can be adjusted
 + Random monospace fonts are used during generation (anonymous, droidsans, ubuntu)
++ Multiple captchas allowed per form
 
-## Website
+## Demonstration
 
 [captcha.baselocker.com](http://captcha.baselocker.com)
 
@@ -95,26 +96,34 @@ Controller ContactsController.php
     <?php
     App::uses('AppController', 'Controller');
     class ContactsController extends AppController {
+        public $captchas = array('captcha', 'captcha-2');
+
         public $components = array(
             'Captcha' => array(
                 'rotate' => true
-            )
+            ),
+            'RequestHandler'
         );
 
         public function captcha()  {
             $this->autoRender = false;
-            $this->Captcha->generate();
+            $captcha = basename($this->params['url']['url'], '.jpg');
+            $this->Captcha->generate($captcha);
         }
 
         public function index() {
             if ($this->RequestHandler->isPost()) {
-                $this->Contact->setCaptcha($this->Captcha->getCode());
-                $this->Contact->set($this->data);
+                foreach($this->captchas as $field) {
+                    $this->Contact->setCaptcha($field,
+                        $this->Captcha->getCode($field));
+                };
+                $this->Contact->set($this->request->data);
                 if ($this->Contact->validates()) {
-                    $this->Session->setFlash('Captcha code validated successfully',
+                    $this->Session->setFlash('Captcha codes validated successfully',
                         'flash_good');
                 }
             }
+            $this->set('captcha_fields', $this->captchas);
         }
     }
     ?>
@@ -122,6 +131,7 @@ Controller ContactsController.php
 Route Config/routes.php
 
     Router::connect('/img/captcha.jpg', array('controller' => 'contacts', 'action' => 'captcha'));
+    Router::connect('/img/captcha-2.jpg', array('controller' => 'contacts', 'action' => 'captcha'));
 
 View Contacts/index.ctp
 
@@ -130,6 +140,14 @@ View Contacts/index.ctp
         echo $this->Html->image('captcha.jpg', array('style' => 'padding: 0.5%;'));
         echo $this->Form->input('captcha');
         echo $this->Form->end('Send');
+
+        echo $this->Form->create('Contact');
+        foreach($captcha_fields as $captcha) {
+            echo $this->Html->image($captcha . '.jpg', array('id' => $captcha));
+            echo $this->Html->link('reload image &#x21bb;', '#', array('class' => 'reload', 'escape' => false));
+            echo $this->Form->input($captcha, array('label' => 'Captcha', 'value' => ''));
+        }
+        echo $this->Form->end('Submit');
     ?>
 
 ## License
@@ -146,6 +164,9 @@ Copyright (C) Donovan du Plessis, donovan@binarytrooper.com
 Adriano Luís Rocha (ALR), [adrianlouis](https://github.com/adrianoluis)
 
 ## Changelog
+
+##### 1.6 [Jun 04, 2014]
+* Add support for multiple captchas per form (mubasshir request)
 
 ##### 1.5 [Aug 05, 2013]
 * Add reload captcha image implementation to contacts sample code

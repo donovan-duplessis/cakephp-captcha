@@ -10,7 +10,7 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @category    Component
- * @version     1.4
+ * @version     1.5
  * @author      Donovan du Plessis <donovan@binarytrooper.com>
  * @copyright   Copyright (C) Donovan du Plessis
  * @license     MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -27,6 +27,8 @@
  * 2012-10-25  ALR  Modify font directory path to <app>/Lib/Fonts
  * 2013-06-19  DdP  - Add initialize method to access controller response
  *                  - Set response type and body via response object
+ * 2014-06-04  DdP  - Add sessionPrefix default configuration parameter
+ *                  - Add support for multiple captcha instantiations
  *
  */
 App::uses('Component', 'Controller');
@@ -61,12 +63,12 @@ class CaptchaComponent extends Component
      * @var array
      */
     private $__defaults = array(
-        'width'      => 120,
-        'height'     => 60,
-        'rotate'     => false,
-        'fontSize'   => 22,
-        'characters' => 6,
-        'sessionKey' => 'Captcha.code'
+        'width'         => 120,
+        'height'        => 60,
+        'rotate'        => false,
+        'fontSize'      => 22,
+        'characters'    => 6,
+        'sessionPrefix' => 'Captcha'
     );
 
     /**
@@ -111,13 +113,27 @@ class CaptchaComponent extends Component
     }
 
     /**
+     * Generate unique session key (by field name) with prefix
+     *  e.g. <prefix>.<field>
+     *
+     * @access private
+     * @param string $field The field name to identify each captcha control
+     * @return string The generated session key
+     * */
+    private function _sessionKey($field)
+    {
+        return "{$this->settings['sessionPrefix']}.{$field}";
+    }
+
+    /**
      * Generate and output the random captcha code image according to specified
      * settings and store the image text value in the session.
      *
      * @access public
+     * @param string $field The field name to identify each captcha control
      * @return void
      */
-    public function generate()
+    public function generate($field='captcha')
     {
         $text = $this->__randomCode();
 
@@ -171,8 +187,10 @@ class CaptchaComponent extends Component
         imagettftext($image, $this->settings['fontSize'], $angle, $x, $y,
                 $txtColour, $font, $text);
 
-        $this->Session->delete($this->settings['sessionKey']);
-        $this->Session->write($this->settings['sessionKey'], $text);
+        $sessionKey = $this->_sessionKey($field);
+
+        $this->Session->delete($sessionKey);
+        $this->Session->write($sessionKey, $text);
 
         $this->response->type('jpg');
         $this->response->body(imagejpeg($image));
@@ -180,14 +198,15 @@ class CaptchaComponent extends Component
     }
 
     /**
-     * Get captcha code stored in Session
+     * Get captcha code stored in Session for specified captcha field
      *
      * @access public
+     * @param string $field The field name to identify each captcha control
      * @return string The generated captcha code text
      */
-    public function getCode()
+    public function getCode($field='captcha')
     {
-        return $this->Session->read($this->settings['sessionKey']);
+        return $this->Session->read($this->_sessionKey($field));
     }
 
 }
