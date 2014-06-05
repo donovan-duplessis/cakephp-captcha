@@ -84,6 +84,7 @@ Model Contact.php
     class Contact extends AppModel {
         public $actsAs = array(
             'Captcha' => array(
+                // We will be handling 2 captcha controls on the form
                 'field' => array('captcha', 'captcha-2'),
                 'error' => 'Captcha code entered invalid'
             )
@@ -95,7 +96,11 @@ Controller ContactsController.php
 
     <?php
     App::uses('AppController', 'Controller');
+
     class ContactsController extends AppController {
+
+        // Keep track of the two captcha controls, each captcha store/verify
+        // will be kept in its own session variable.
         public $captchas = array('captcha', 'captcha-2');
 
         public $components = array(
@@ -107,22 +112,35 @@ Controller ContactsController.php
 
         public function captcha()  {
             $this->autoRender = false;
+
+            // Retrieve the basename for the image route so that we can
+            // uniquely identify and generate each captcha control.
             $captcha = basename($this->params['url']['url'], '.jpg');
+
+            /// Generate actual captcha image (each image unique per image route)
             $this->Captcha->generate($captcha);
         }
 
         public function index() {
             if ($this->RequestHandler->isPost()) {
+
+                // For each captcha control we need to store the captcha value,
+                // retreived from the session, in the corresponding model field so
+                // that it can be validated.
                 foreach($this->captchas as $field) {
                     $this->Contact->setCaptcha($field,
                         $this->Captcha->getCode($field));
                 };
+
                 $this->Contact->set($this->request->data);
+
                 if ($this->Contact->validates()) {
                     $this->Session->setFlash('Captcha codes validated successfully',
                         'flash_good');
                 }
             }
+
+            // Store configured captcha controls in view for rendering
             $this->set('captcha_fields', $this->captchas);
         }
     }
@@ -137,6 +155,8 @@ View Contacts/index.ctp
 
     <?php
         echo $this->Form->create('Contact');
+        // For each configured captcha control, render the captcha image +
+        // text input element + reload link
         foreach($captcha_fields as $index => $captcha) {
             echo $this->Html->image($captcha . '.jpg', array('id' => $captcha));
             echo $this->Html->link('reload image &#x21bb;', '#', array('class' => 'reload', 'escape' => false));
