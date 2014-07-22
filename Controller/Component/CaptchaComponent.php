@@ -192,8 +192,15 @@ class CaptchaComponent extends Component
         $this->Session->delete($sessionKey);
         $this->Session->write($sessionKey, $text);
 
+        // Capture the image in a variable
+        ob_start();
+        imagejpeg($image);
+        $stringImage = ob_get_clean();
+        imagedestroy($image);
+        
+        // Set the image as the body of the response
         $this->response->type('jpg');
-        $this->response->body(imagejpeg($image));
+        $this->response->body($stringImage);
         $this->response->disableCache();
     }
 
