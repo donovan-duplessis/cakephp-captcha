@@ -43,8 +43,11 @@
 <li>Supports rotation of text</li>
 <li>The image width and height dimensions can be set</li>
 <li>The font size can be adjusted</li>
-<li>Random monospace fonts are used during generation (anonymous, droidsans, ubuntu)</li>
+<li>Random monospace fonts are used during generation <code>anonymous|droidsans|ubuntu</code>
+</li>
 <li>Multiple captchas allowed per form</li>
+<li>Theme colour profiles <code>default|random|green|red|blue</code>
+</li>
 </ul><h2>
 <a name="demonstration" class="anchor" href="#demonstration"><span class="octicon octicon-link"></span></a>Demonstration</h2>
 
@@ -157,6 +160,7 @@ class ContactsController extends AppController {
     public $components = array(
         'Captcha' =&gt; array(
             'rotate' =&gt; true
+            'theme'  =&gt; 'random'
         ),
         'RequestHandler'
     );
@@ -242,6 +246,11 @@ Redistributions of files must retain the above copyright notice.</p>
 <a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>Changelog</h2>
 
 <h5>
+<a name="18-jun-25-2014" class="anchor" href="#18-jun-25-2014"><span class="octicon octicon-link"></span></a>1.8 [Jun 25, 2014]</h5>
+
+<ul>
+<li>Add support for theme colour configurations</li>
+</ul><h5>
 <a name="17-jun-24-2014" class="anchor" href="#17-jun-24-2014"><span class="octicon octicon-link"></span></a>1.7 [Jun 24, 2014]</h5>
 
 <ul>
