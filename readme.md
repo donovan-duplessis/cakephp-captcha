@@ -176,8 +176,8 @@ Copyright (C) Donovan du Plessis, donovan@binarytrooper.com
 
 ## Contributors
 
-Adriano Luís Rocha (ALR), [adrianlouis](https://github.com/adrianoluis)
-Yanosh Kunsh (YLK), [yanosh-kunsh](https://github.com/yanosh-kunsh)
++ Adriano Luís Rocha (ALR), [adrianlouis](https://github.com/adrianoluis)
++ Yanosh Kunsh (YLK), [yanosh-kunsh](https://github.com/yanosh-kunsh)
 
 ## Changelog
 
