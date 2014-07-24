@@ -177,8 +177,12 @@ Copyright (C) Donovan du Plessis, donovan@binarytrooper.com
 ## Contributors
 
 Adriano Luís Rocha (ALR), [adrianlouis](https://github.com/adrianoluis)
+Yanosh Kunsh (YLK), [yanosh-kunsh](https://github.com/yanosh-kunsh)
 
 ## Changelog
+
+##### 1.7 [Jun 24, 2014]
+* Output image data in repsonse body correctly (YLK)
 
 ##### 1.6 [Jun 04, 2014]
 * Add support for multiple captchas per form (mubasshir request)
