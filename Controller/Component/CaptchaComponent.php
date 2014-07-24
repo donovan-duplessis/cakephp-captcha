@@ -29,6 +29,9 @@
  *                  - Set response type and body via response object
  * 2014-06-04  DdP  - Add sessionPrefix default configuration parameter
  *                  - Add support for multiple captcha instantiations
+ * 2014-07-23  YLK  Capture the data from imagejpeg() in a variable using
+ *                  ob_start() and ob_get_clean() and then set it as the
+ *                  response body.
  *
  */
 App::uses('Component', 'Controller');
@@ -192,8 +195,15 @@ class CaptchaComponent extends Component
         $this->Session->delete($sessionKey);
         $this->Session->write($sessionKey, $text);
 
+        // Capture the image in a variable
+        ob_start();
+        imagejpeg($image);
+        $imageData = ob_get_clean();
+        imagedestroy($image);
+        
+        // Set the image as the body of the response
         $this->response->type('jpg');
-        $this->response->body(imagejpeg($image));
+        $this->response->body($imageData);
         $this->response->disableCache();
     }
 
