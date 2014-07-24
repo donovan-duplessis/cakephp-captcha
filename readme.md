@@ -8,7 +8,7 @@ Features:
 + Supports rotation of text
 + The image width and height dimensions can be set
 + The font size can be adjusted
-+ Random monospace fonts are used during generation (anonymous, droidsans, ubuntu)
++ Random monospace fonts are used during generation ```anonymous|droidsans|ubuntu```
 + Multiple captchas allowed per form
 + Theme colour profiles ```default|random|green|red|blue```
 
