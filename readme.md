@@ -10,6 +10,7 @@ Features:
 + The font size can be adjusted
 + Random monospace fonts are used during generation (anonymous, droidsans, ubuntu)
 + Multiple captchas allowed per form
++ Theme colour profiles ```default|random|green|red|blue```
 
 ## Demonstration
 
@@ -106,6 +107,7 @@ Controller ContactsController.php
         public $components = array(
             'Captcha' => array(
                 'rotate' => true
+                'theme'  => 'random'
             ),
             'RequestHandler'
         );
@@ -180,6 +182,9 @@ Copyright (C) Donovan du Plessis, donovan@binarytrooper.com
 + Yanosh Kunsh (YLK), [yanosh-kunsh](https://github.com/yanosh-kunsh)
 
 ## Changelog
+
+##### 1.8 [Jun 25, 2014]
+* Add support for theme colour configurations
 
 ##### 1.7 [Jun 24, 2014]
 * Output image data in repsonse body correctly (YLK)

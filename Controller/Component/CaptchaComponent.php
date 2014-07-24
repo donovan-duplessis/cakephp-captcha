@@ -10,7 +10,7 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @category    Component
- * @version     1.5
+ * @version     1.7
  * @author      Donovan du Plessis <donovan@binarytrooper.com>
  * @copyright   Copyright (C) Donovan du Plessis
  * @license     MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -32,6 +32,7 @@
  * 2014-07-23  YLK  Capture the data from imagejpeg() in a variable using
  *                  ob_start() and ob_get_clean() and then set it as the
  *                  response body.
+ * 2014-07-25  DdP  Add support for theme colour configurations
  *
  */
 App::uses('Component', 'Controller');
@@ -61,6 +62,34 @@ class CaptchaComponent extends Component
     public $response;
 
     /**
+     * Default theme colour profiles
+     *
+     * @var array
+     */
+    private $__themes = array(
+        'default' => array(
+            'bkgColor'   => array(238, 239, 239),
+            'txtColor'   => array(32, 32, 32),
+            'noiseColor' => array(160, 160, 160),
+        ),
+        'green' => array(
+            'bkgColor'   => array(0, 255, 0),
+            'txtColor'   => array(255, 255, 255),
+            'noiseColor' => array(0, 153, 0)
+        ),
+        'red' => array(
+            'bkgColor'   => array(255, 153, 153),
+            'txtColor'   => array(255, 255, 255),
+            'noiseColor' => array(255, 51, 51)
+        ),
+        'blue' => array(
+            'bkgColor'   => array(0, 128, 255),
+            'txtColor'   => array(255, 255, 51),
+            'noiseColor' => array(0, 0, 255)
+        ));
+
+
+    /**
      * Default values to be merged with settings
      *
      * @var array
@@ -71,7 +100,8 @@ class CaptchaComponent extends Component
         'rotate'        => false,
         'fontSize'      => 22,
         'characters'    => 6,
-        'sessionPrefix' => 'Captcha'
+        'sessionPrefix' => 'Captcha',
+        'theme'         => 'default'
     );
 
     /**
@@ -122,10 +152,31 @@ class CaptchaComponent extends Component
      * @access private
      * @param string $field The field name to identify each captcha control
      * @return string The generated session key
-     * */
+     */
     private function _sessionKey($field)
     {
         return "{$this->settings['sessionPrefix']}.{$field}";
+    }
+
+    /**
+     * Get colour profile for specified theme name
+     *  e.g. default|random|green|red|blue
+     *
+     * @access private
+     * @return array The theme colour profile
+     */
+    private function __getTheme()
+    {
+        $setting = strtolower($this->settings['theme']);
+
+        if($setting == 'random') {
+            $theme = array_rand($this->__themes);
+        } else {
+            $theme = array_key_exists($setting, $this->__themes) ?
+                $setting : 'default';
+        }
+
+        return $this->__themes[$theme];
     }
 
     /**
@@ -145,14 +196,21 @@ class CaptchaComponent extends Component
 
         $image = imagecreatetruecolor($width, $height);
 
-        $bkgColour = imagecolorallocate($image, 238,239,239);
-        $borColour = imagecolorallocate($image, 208,208,208);
-        $txtColour = imagecolorallocate($image, 96, 96, 96);
+        // Get theme colour profile
+        $theme = $this->__getTheme();
+
+        $bkgColour = call_user_func_array('imagecolorallocate',
+            array_merge((array) $image, $theme['bkgColor']));
+        $txtColour = call_user_func_array('imagecolorallocate',
+            array_merge((array) $image, $theme['txtColor']));
+
+        $borColour = imagecolorallocate($image, 208, 208, 208);
 
         imagefilledrectangle($image, 0, 0, $width, $height, $bkgColour);
         imagerectangle($image, 0, 0, $width-1, $height - 1, $borColour);
 
-        $noiseColour = imagecolorallocate($image, 205, 205, 193);
+        $noiseColour = call_user_func_array('imagecolorallocate',
+            array_merge((array) $image, $theme['noiseColor']));
 
         // Add random circle noise
         for ($i = 0; $i < ($width * $height) / 3; $i++)
@@ -200,7 +258,7 @@ class CaptchaComponent extends Component
         imagejpeg($image);
         $imageData = ob_get_clean();
         imagedestroy($image);
-        
+
         // Set the image as the body of the response
         $this->response->type('jpg');
         $this->response->body($imageData);

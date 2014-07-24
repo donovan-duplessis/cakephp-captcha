@@ -27,7 +27,8 @@ class ContactsController extends AppController {
      */
     public $components = array(
         'Captcha' => array(
-            'rotate' => true
+            'rotate' => true,
+            'theme'  => 'random'
         ),
         'RequestHandler'
     );
