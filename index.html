@@ -134,6 +134,7 @@ App::uses('AppModel', 'Model');
 class Contact extends AppModel {
     public $actsAs = array(
         'Captcha' =&gt; array(
+            // We will be handling 2 captcha controls on the form
             'field' =&gt; array('captcha', 'captcha-2'),
             'error' =&gt; 'Captcha code entered invalid'
         )
@@ -146,7 +147,11 @@ class Contact extends AppModel {
 
 <pre><code>&lt;?php
 App::uses('AppController', 'Controller');
+
 class ContactsController extends AppController {
+
+    // Keep track of the two captcha controls, each captcha store/verify
+    // will be kept in its own session variable.
     public $captchas = array('captcha', 'captcha-2');
 
     public $components = array(
@@ -158,22 +163,35 @@ class ContactsController extends AppController {
 
     public function captcha()  {
         $this-&gt;autoRender = false;
+
+        // Retrieve the basename for the image route so that we can
+        // uniquely identify and generate each captcha control.
         $captcha = basename($this-&gt;params['url']['url'], '.jpg');
+
+        /// Generate actual captcha image (each image unique per image route)
         $this-&gt;Captcha-&gt;generate($captcha);
     }
 
     public function index() {
         if ($this-&gt;RequestHandler-&gt;isPost()) {
+
+            // For each captcha control we need to store the captcha value,
+            // retreived from the session, in the corresponding model field so
+            // that it can be validated.
             foreach($this-&gt;captchas as $field) {
                 $this-&gt;Contact-&gt;setCaptcha($field,
                     $this-&gt;Captcha-&gt;getCode($field));
             };
+
             $this-&gt;Contact-&gt;set($this-&gt;request-&gt;data);
+
             if ($this-&gt;Contact-&gt;validates()) {
                 $this-&gt;Session-&gt;setFlash('Captcha codes validated successfully',
                     'flash_good');
             }
         }
+
+        // Store configured captcha controls in view for rendering
         $this-&gt;set('captcha_fields', $this-&gt;captchas);
     }
 }
@@ -190,6 +208,8 @@ Router::connect('/img/captcha-2.jpg', array('controller' =&gt; 'contacts', 'acti
 
 <pre><code>&lt;?php
     echo $this-&gt;Form-&gt;create('Contact');
+    // For each configured captcha control, render the captcha image +
+    // text input element + reload link
     foreach($captcha_fields as $index =&gt; $captcha) {
         echo $this-&gt;Html-&gt;image($captcha . '.jpg', array('id' =&gt; $captcha));
         echo $this-&gt;Html-&gt;link('reload image &amp;#x21bb;', '#', array('class' =&gt; 'reload', 'escape' =&gt; false));
@@ -213,12 +233,20 @@ Redistributions of files must retain the above copyright notice.</p>
 <h2>
 <a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
 
-<p>Adriano Luís Rocha (ALR), <a href="https://github.com/adrianoluis">adrianlouis</a></p>
-
-<h2>
+<ul>
+<li>Adriano Luís Rocha (ALR), <a href="https://github.com/adrianoluis">adrianlouis</a>
+</li>
+<li>Yanosh Kunsh (YLK), <a href="https://github.com/yanosh-kunsh">yanosh-kunsh</a>
+</li>
+</ul><h2>
 <a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>Changelog</h2>
 
 <h5>
+<a name="17-jun-24-2014" class="anchor" href="#17-jun-24-2014"><span class="octicon octicon-link"></span></a>1.7 [Jun 24, 2014]</h5>
+
+<ul>
+<li>Output image data in repsonse body correctly (YLK)</li>
+</ul><h5>
 <a name="16-jun-04-2014" class="anchor" href="#16-jun-04-2014"><span class="octicon octicon-link"></span></a>1.6 [Jun 04, 2014]</h5>
 
 <ul>
