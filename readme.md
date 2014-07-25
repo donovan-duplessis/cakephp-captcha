@@ -80,18 +80,20 @@ If you are using the authentication component, ensure that the captcha action (t
 
 Model Contact.php
 
-    <?php
-    App::uses('AppModel', 'Model');
-    class Contact extends AppModel {
-        public $actsAs = array(
-            'Captcha' => array(
-                // We will be handling 2 captcha controls on the form
-                'field' => array('captcha', 'captcha-2'),
-                'error' => 'Captcha code entered invalid'
-            )
-        );
-    }
-    ?>
+```php
+<?php
+App::uses('AppModel', 'Model');
+class Contact extends AppModel {
+    public $actsAs = array(
+        'Captcha' => array(
+            // We will be handling 2 captcha controls on the form
+            'field' => array('captcha', 'captcha-2'),
+            'error' => 'Captcha code entered invalid'
+        )
+    );
+}
+?>
+```
 
 Controller ContactsController.php
 
