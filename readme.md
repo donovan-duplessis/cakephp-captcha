@@ -18,8 +18,8 @@ Features:
 
 **examples:**
 
-![alt caotcha](http://captcha.baselocker.com/captchas/captcha.jpg "Captcha")
-![alt caotcha](http://captcha.baselocker.com/captchas/captcha-2.jpg "Captcha")
+![alt captcha](http://captcha.baselocker.com/captchas/captcha.jpg "Captcha")&nbsp;
+![alt captcha](http://captcha.baselocker.com/captchas/captcha-2.jpg "Captcha")
 
 ## Requirements
 
