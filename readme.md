@@ -4,7 +4,7 @@ Generates an image with random alphanumeric characters which requires a human to
 
 Features:
 
-+ Random alphanumeric text
++ Multiple captcha types ```alpha|math```
 + Supports rotation of text
 + The image width and height dimensions can be set
 + The font size can be adjusted
@@ -16,6 +16,11 @@ Features:
 
 [captcha.baselocker.com](http://captcha.baselocker.com)
 
+**examples:**
+
+![alt caotcha](http://captcha.baselocker.com/captchas/captcha.jpg "Captcha")
+![alt caotcha](http://captcha.baselocker.com/captchas/captcha-2.jpg "Captcha")
+
 ## Requirements
 
 + PHP version: 5.2+
@@ -25,28 +30,38 @@ Features:
 
 Clone or download the component:
 
-    git clone git://github.com/donovan-duplessis/cakephp-captcha.git
+```bash
+git clone git://github.com/donovan-duplessis/cakephp-captcha.git
+```
 
 Copy the component and behavior into your framework at:
 
-    cd cakephp-captcha
-    cp Controller/Component/CaptchaComponent.php <your-app>/app/Controller/Component/
-    cp Model/Behavior/CaptchaBehavior.php <your-app>/app/Model/Behavior/
+```bash
+cd cakephp-captcha
+cp Controller/Component/CaptchaComponent.php <your-app>/app/Controller/Component/
+cp Model/Behavior/CaptchaBehavior.php <your-app>/app/Model/Behavior/
+```
 
 Copy the fonts into your framework at:
 
-    cp -R Lib/Fonts <your-app>/app/Lib/
-    chmod 755 <your-app>/app/Lib/Fonts
+```bash
+cp -R Lib/Fonts <your-app>/app/Lib/
+chmod 755 <your-app>/app/Lib/Fonts
+```
 
 GD library needs to be installed for PHP (for dynamic image creation):
 
 Ubuntu
 
-    sudo apt-get install php5-gd
+```bash
+sudo apt-get install php5-gd
+```
 
 Mac OSX (MacPorts)
 
-    sudo port install php5-gd
+```bash
+sudo port install php5-gd
+```
 
 ## Errors
 
@@ -58,15 +73,21 @@ Install php5-gd library as described above
 
 Include Captcha behavior in model:<br/>
 
-    public $actsAs = array('Captcha');
+```php
+public $actsAs = array('Captcha');
+```
 
 Include Captcha component in controller:
 
-    public $components = array('Captcha');
+```php
+public $components = array('Captcha');
+```
 
 To output the captcha image from controller:
 
-    $this->Captcha->generate();
+```php
+$this->Captcha->generate();
+```
 
 ## Reload image
 
@@ -97,82 +118,90 @@ class Contact extends AppModel {
 
 Controller ContactsController.php
 
-    <?php
-    App::uses('AppController', 'Controller');
+```php
+<?php
+App::uses('AppController', 'Controller');
 
-    class ContactsController extends AppController {
+class ContactsController extends AppController {
 
-        // Keep track of the two captcha controls, each captcha store/verify
-        // will be kept in its own session variable.
-        public $captchas = array('captcha', 'captcha-2');
+    // Keep track of the two captcha controls, each captcha store/verify
+    // will be kept in its own session variable.
+    public $captchas = array('captcha', 'captcha-2');
 
-        public $components = array(
-            'Captcha' => array(
-                'rotate' => true
-                'theme'  => 'random'
-            ),
-            'RequestHandler'
-        );
+    public $components = array(
+        'Captcha' => array(
+            'type'   => array('alpha', 'math'),
+            'rotate' => true
+            'theme'  => 'random'
+        ),
+        'RequestHandler'
+    );
 
-        public function captcha()  {
-            $this->autoRender = false;
+    public function captcha()  {
+        $this->autoRender = false;
 
-            // Retrieve the basename for the image route so that we can
-            // uniquely identify and generate each captcha control.
-            $captcha = basename($this->params['url']['url'], '.jpg');
+        // Retrieve the basename for the image route so that we can
+        // uniquely identify and generate each captcha control.
+        $captcha = basename($this->params['url']['url'], '.jpg');
 
-            /// Generate actual captcha image (each image unique per image route)
-            $this->Captcha->generate($captcha);
-        }
-
-        public function index() {
-            if ($this->RequestHandler->isPost()) {
-
-                // For each captcha control we need to store the captcha value,
-                // retreived from the session, in the corresponding model field so
-                // that it can be validated.
-                foreach($this->captchas as $field) {
-                    $this->Contact->setCaptcha($field,
-                        $this->Captcha->getCode($field));
-                };
-
-                $this->Contact->set($this->request->data);
-
-                if ($this->Contact->validates()) {
-                    $this->Session->setFlash('Captcha codes validated successfully',
-                        'flash_good');
-                }
-            }
-
-            // Store configured captcha controls in view for rendering
-            $this->set('captcha_fields', $this->captchas);
-        }
+        /// Generate actual captcha image (each image unique per image route)
+        $this->Captcha->generate($captcha);
     }
-    ?>
+
+    public function index() {
+        if ($this->RequestHandler->isPost()) {
+
+            // For each captcha control we need to store the captcha value,
+            // retreived from the session, in the corresponding model field so
+            // that it can be validated.
+            foreach($this->captchas as $field) {
+                $this->Contact->setCaptcha($field,
+                    $this->Captcha->getCode($field));
+            };
+
+            $this->Contact->set($this->request->data);
+
+            if ($this->Contact->validates()) {
+                $this->Session->setFlash('Captcha codes validated successfully',
+                    'flash_good');
+            }
+        }
+
+        // Store configured captcha controls in view for rendering
+        $this->set('captcha_fields', $this->captchas);
+    }
+}
+?>
+```
 
 Route Config/routes.php
 
-    Router::connect('/img/captcha.jpg', array('controller' => 'contacts', 'action' => 'captcha'));
-    Router::connect('/img/captcha-2.jpg', array('controller' => 'contacts', 'action' => 'captcha'));
+```php
+Router::connect('/img/captcha.jpg', array('controller' => 'contacts', 'action' => 'captcha'));
+Router::connect('/img/captcha-2.jpg', array('controller' => 'contacts', 'action' => 'captcha'));
+```
 
 View Contacts/index.ctp
 
-    <?php
-        echo $this->Form->create('Contact');
-        // For each configured captcha control, render the captcha image +
-        // text input element + reload link
-        foreach($captcha_fields as $index => $captcha) {
-            echo $this->Html->image($captcha . '.jpg', array('id' => $captcha));
-            echo $this->Html->link('reload image &#x21bb;', '#', array('class' => 'reload', 'escape' => false));
-            echo $this->Form->input($captcha, array('label' => 'Captcha', 'value' => '', 'tabindex' => $index + 1)); 
-        }
-        echo $this->Form->end('Submit');
-    ?>
+```php
+<?php
+    echo $this->Form->create('Contact');
+    // For each configured captcha control, render the captcha image +
+    // text input element + reload link
+    foreach($captcha_fields as $index => $captcha) {
+        echo $this->Html->image($captcha . '.jpg', array('id' => $captcha));
+        echo $this->Html->link('reload image &#x21bb;', '#', array('class' => 'reload', 'escape' => false));
+        echo $this->Form->input($captcha, array('label' => 'Captcha', 'value' => '', 'tabindex' => $index + 1));
+    }
+    echo $this->Form->end('Submit');
+?>
+```
 
 ## License
 
-Licensed under The MIT License<br/>
-Redistributions of files must retain the above copyright notice.
++ Licensed under The MIT License
++ Redistributions of files must retain the above copyright notice.
++ [http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT)
 
 ## Copyright
 
@@ -187,12 +216,13 @@ Copyright (C) Donovan du Plessis, donovan@binarytrooper.com
 
 ##### 1.8 [Jun 25, 2014]
 * Add support for theme colour configurations
+* Add support for multiple captch types ```alpha|math```
 
 ##### 1.7 [Jun 24, 2014]
-* Output image data in repsonse body correctly (YLK)
+* Output image data in repsonse body correctly ```(YLK)```
 
 ##### 1.6 [Jun 04, 2014]
-* Add support for multiple captchas per form (mubasshir request)
+* Add support for multiple captchas per form ```(mubasshir request)```
 
 ##### 1.5 [Aug 05, 2013]
 * Add reload captcha image implementation to contacts sample code
@@ -203,10 +233,10 @@ Copyright (C) Donovan du Plessis, donovan@binarytrooper.com
 
 ##### 1.3 [Oct 25, 2012]
 * Set font path to Lib/Fonts (ALR)
-* Access Model reference correctly in Behavior (ALR)
+* Access Model reference correctly in Behavior ```(ALR)```
 
 ##### 1.2 [Oct 17, 2012]
-* Set component and behavior to framework 2.0 compliant (ALR)
+* Set component and behavior to framework 2.0 compliant ```(ALR)```
 
 ##### 1.1 [Apr 18, 2012]
 * Add character limit configuration to component

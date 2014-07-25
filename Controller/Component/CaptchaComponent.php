@@ -32,7 +32,8 @@
  * 2014-07-23  YLK  Capture the data from imagejpeg() in a variable using
  *                  ob_start() and ob_get_clean() and then set it as the
  *                  response body.
- * 2014-07-25  DdP  Add support for theme colour configurations
+ * 2014-07-25  DdP  - Add support for theme colour configurations
+ *                  - Add support for multiple types: alpha|math
  *
  */
 App::uses('Component', 'Controller');
@@ -80,7 +81,7 @@ class CaptchaComponent extends Component
         'red' => array(
             'bkgColor'   => array(255, 153, 153),
             'txtColor'   => array(255, 255, 255),
-            'noiseColor' => array(255, 51, 51)
+            'noiseColor' => array(255, 0, 0)
         ),
         'blue' => array(
             'bkgColor'   => array(0, 128, 255),
@@ -101,7 +102,8 @@ class CaptchaComponent extends Component
         'fontSize'      => 22,
         'characters'    => 6,
         'sessionPrefix' => 'Captcha',
-        'theme'         => 'default'
+        'theme'         => 'default',
+        'type'          => array('alpha')
     );
 
     /**
@@ -112,6 +114,13 @@ class CaptchaComponent extends Component
      * @var array
      */
     private $__fontTypes = array('anonymous', 'droidsans', 'ubuntu');
+
+    /**
+     * Base arithmetic operators available
+     *
+     * @var array
+     */
+    private $__operators = array('+', '-');
 
     /**
      * Initializes CaptchaComponent for use in the controller
@@ -139,7 +148,7 @@ class CaptchaComponent extends Component
      * @access private
      * @return string The generated code
      */
-    private function __randomCode()
+    private function __randomAlpha()
     {
         $valid = 'abcdefghijklmnpqrstuvwxyz123456789';
         return substr(str_shuffle($valid), 0, $this->settings['characters']);
@@ -156,6 +165,35 @@ class CaptchaComponent extends Component
     private function _sessionKey($field)
     {
         return "{$this->settings['sessionPrefix']}.{$field}";
+    }
+
+    /**
+     * Generate random arithmetic expression
+     *  e.g. number [+|-] number
+     *
+     * @access private
+     * @param integer $minimum The minimum number to generate
+     * @param integer $maximum The maximum number to generate
+     * @return string The generated expression
+     */
+    private function __randomArithmetic($minimum = 1, $maximum = 6)
+    {
+        $numbers = range($minimum, $maximum);
+        shuffle($numbers);
+
+        // Pick two random numbers for each side of operator
+        list($left, $right) = array_slice($numbers, 0, 2);
+
+        // Get random operator [+|-]
+        $operator = $this->__operators[array_rand($this->__operators)];
+
+        // If operation is subtraction (−), and the left value is less than
+        // the right value, then swap left and right (postitive results).
+        if($operator == '-' && $left < $right) {
+            list($left, $right) = array($right, $left);
+        }
+
+        return sprintf('%d%s%d', $left, $operator, $right);
     }
 
     /**
@@ -189,7 +227,20 @@ class CaptchaComponent extends Component
      */
     public function generate($field='captcha')
     {
-        $text = $this->__randomCode();
+        // Generate random captcha text for specified captcha type(s),
+        // supports: alpha|math.
+        $captchaType =
+            $this->settings['type'][array_rand($this->settings['type'])];
+
+        if($captchaType == 'math') {
+            $text = $this->__randomArithmetic();
+            // Calculate result of arithmetic expression; eval() is dangerous
+            // but we are in control of input (no user provided data).
+            $sessionValue = eval("return($text);");
+            $text .= '=?';
+        } else  {
+            $sessionValue = $text = $this->__randomAlpha();
+        }
 
         $width  = (int) $this->settings['width'];
         $height = (int) $this->settings['height'];
@@ -251,7 +302,7 @@ class CaptchaComponent extends Component
         $sessionKey = $this->_sessionKey($field);
 
         $this->Session->delete($sessionKey);
-        $this->Session->write($sessionKey, $text);
+        $this->Session->write($sessionKey, $sessionValue);
 
         // Capture the image in a variable
         ob_start();
