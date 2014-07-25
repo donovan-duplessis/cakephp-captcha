@@ -1,6 +1,6 @@
 # Captcha support for CakePHP 2.2+
 
-Generates an image with random alphanumeric characters which requires a human to validate.  This is to prevent automated spam and spam bots.
+Generates an image with random text ```alpha|math``` which requires a human to validate.  This is to prevent automated spam and spam bots.
 
 Features:
 
@@ -16,7 +16,7 @@ Features:
 
 [captcha.baselocker.com](http://captcha.baselocker.com)
 
-**examples:**
+**example (randomized on page load):**
 
 ![alt captcha](http://captcha.baselocker.com/captchas/captcha.jpg "Captcha")&nbsp;
 ![alt captcha](http://captcha.baselocker.com/captchas/captcha-2.jpg "Captcha")
