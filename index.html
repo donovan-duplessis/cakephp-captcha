@@ -39,7 +39,8 @@
 <p>Features:</p>
 
 <ul>
-<li>Random alphanumeric text</li>
+<li>Multiple captcha types <code>alpha|math</code>
+</li>
 <li>Supports rotation of text</li>
 <li>The image width and height dimensions can be set</li>
 <li>The font size can be adjusted</li>
@@ -53,6 +54,11 @@
 
 <p><a href="http://captcha.baselocker.com">captcha.baselocker.com</a></p>
 
+<p><strong>examples:</strong></p>
+
+<p><img src="http://captcha.baselocker.com/captchas/captcha.jpg" alt="alt captcha" title="Captcha"> 
+<img src="http://captcha.baselocker.com/captchas/captcha-2.jpg" alt="alt captcha" title="Captcha"></p>
+
 <h2>
 <a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
@@ -64,33 +70,33 @@
 
 <p>Clone or download the component:</p>
 
-<pre><code>git clone git://github.com/donovan-duplessis/cakephp-captcha.git
-</code></pre>
+<div class="highlight highlight-bash"><pre>git clone git://github.com/donovan-duplessis/cakephp-captcha.git
+</pre></div>
 
 <p>Copy the component and behavior into your framework at:</p>
 
-<pre><code>cd cakephp-captcha
+<div class="highlight highlight-bash"><pre><span class="nb">cd </span>cakephp-captcha
 cp Controller/Component/CaptchaComponent.php &lt;your-app&gt;/app/Controller/Component/
 cp Model/Behavior/CaptchaBehavior.php &lt;your-app&gt;/app/Model/Behavior/
-</code></pre>
+</pre></div>
 
 <p>Copy the fonts into your framework at:</p>
 
-<pre><code>cp -R Lib/Fonts &lt;your-app&gt;/app/Lib/
-chmod 755 &lt;your-app&gt;/app/Lib/Fonts
-</code></pre>
+<div class="highlight highlight-bash"><pre>cp -R Lib/Fonts &lt;your-app&gt;/app/Lib/
+chmod <span class="m">755</span> &lt;your-app&gt;/app/Lib/Fonts
+</pre></div>
 
 <p>GD library needs to be installed for PHP (for dynamic image creation):</p>
 
 <p>Ubuntu</p>
 
-<pre><code>sudo apt-get install php5-gd
-</code></pre>
+<div class="highlight highlight-bash"><pre>sudo apt-get install php5-gd
+</pre></div>
 
 <p>Mac OSX (MacPorts)</p>
 
-<pre><code>sudo port install php5-gd
-</code></pre>
+<div class="highlight highlight-bash"><pre>sudo port install php5-gd
+</pre></div>
 
 <h2>
 <a name="errors" class="anchor" href="#errors"><span class="octicon octicon-link"></span></a>Errors</h2>
@@ -104,18 +110,18 @@ chmod 755 &lt;your-app&gt;/app/Lib/Fonts
 
 <p>Include Captcha behavior in model:<br></p>
 
-<pre><code>public $actsAs = array('Captcha');
-</code></pre>
+<div class="highlight highlight-php"><pre><span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'Captcha'</span><span class="p">);</span>
+</pre></div>
 
 <p>Include Captcha component in controller:</p>
 
-<pre><code>public $components = array('Captcha');
-</code></pre>
+<div class="highlight highlight-php"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'Captcha'</span><span class="p">);</span>
+</pre></div>
 
 <p>To output the captcha image from controller:</p>
 
-<pre><code>$this-&gt;Captcha-&gt;generate();
-</code></pre>
+<div class="highlight highlight-php"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Captcha</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">();</span>
+</pre></div>
 
 <h2>
 <a name="reload-image" class="anchor" href="#reload-image"><span class="octicon octicon-link"></span></a>Reload image</h2>
@@ -132,104 +138,106 @@ chmod 755 &lt;your-app&gt;/app/Lib/Fonts
 
 <p>Model Contact.php</p>
 
-<pre><code>&lt;?php
-App::uses('AppModel', 'Model');
-class Contact extends AppModel {
-    public $actsAs = array(
-        'Captcha' =&gt; array(
-            // We will be handling 2 captcha controls on the form
-            'field' =&gt; array('captcha', 'captcha-2'),
-            'error' =&gt; 'Captcha code entered invalid'
-        )
-    );
-}
-?&gt;
-</code></pre>
+<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">'AppModel'</span><span class="p">,</span> <span class="s1">'Model'</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">Contact</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'Captcha'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="c1">// We will be handling 2 captcha controls on the form</span>
+            <span class="s1">'field'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'captcha'</span><span class="p">,</span> <span class="s1">'captcha-2'</span><span class="p">),</span>
+            <span class="s1">'error'</span> <span class="o">=&gt;</span> <span class="s1">'Captcha code entered invalid'</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
 
 <p>Controller ContactsController.php</p>
 
-<pre><code>&lt;?php
-App::uses('AppController', 'Controller');
+<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">'AppController'</span><span class="p">,</span> <span class="s1">'Controller'</span><span class="p">);</span>
 
-class ContactsController extends AppController {
+<span class="k">class</span> <span class="nc">ContactsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
-    // Keep track of the two captcha controls, each captcha store/verify
-    // will be kept in its own session variable.
-    public $captchas = array('captcha', 'captcha-2');
+    <span class="c1">// Keep track of the two captcha controls, each captcha store/verify</span>
+    <span class="c1">// will be kept in its own session variable.</span>
+    <span class="k">public</span> <span class="nv">$captchas</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'captcha'</span><span class="p">,</span> <span class="s1">'captcha-2'</span><span class="p">);</span>
 
-    public $components = array(
-        'Captcha' =&gt; array(
-            'rotate' =&gt; true
-            'theme'  =&gt; 'random'
-        ),
-        'RequestHandler'
-    );
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'Captcha'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'type'</span>   <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'alpha'</span><span class="p">,</span> <span class="s1">'math'</span><span class="p">),</span>
+            <span class="s1">'rotate'</span> <span class="o">=&gt;</span> <span class="k">true</span>
+            <span class="s1">'theme'</span>  <span class="o">=&gt;</span> <span class="s1">'random'</span>
+        <span class="p">),</span>
+        <span class="s1">'RequestHandler'</span>
+    <span class="p">);</span>
 
-    public function captcha()  {
-        $this-&gt;autoRender = false;
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">captcha</span><span class="p">()</span>  <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">autoRender</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
 
-        // Retrieve the basename for the image route so that we can
-        // uniquely identify and generate each captcha control.
-        $captcha = basename($this-&gt;params['url']['url'], '.jpg');
+        <span class="c1">// Retrieve the basename for the image route so that we can</span>
+        <span class="c1">// uniquely identify and generate each captcha control.</span>
+        <span class="nv">$captcha</span> <span class="o">=</span> <span class="nb">basename</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">'url'</span><span class="p">][</span><span class="s1">'url'</span><span class="p">],</span> <span class="s1">'.jpg'</span><span class="p">);</span>
 
-        /// Generate actual captcha image (each image unique per image route)
-        $this-&gt;Captcha-&gt;generate($captcha);
-    }
+        <span class="c1">/// Generate actual captcha image (each image unique per image route)</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Captcha</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">(</span><span class="nv">$captcha</span><span class="p">);</span>
+    <span class="p">}</span>
 
-    public function index() {
-        if ($this-&gt;RequestHandler-&gt;isPost()) {
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">RequestHandler</span><span class="o">-&gt;</span><span class="na">isPost</span><span class="p">())</span> <span class="p">{</span>
 
-            // For each captcha control we need to store the captcha value,
-            // retreived from the session, in the corresponding model field so
-            // that it can be validated.
-            foreach($this-&gt;captchas as $field) {
-                $this-&gt;Contact-&gt;setCaptcha($field,
-                    $this-&gt;Captcha-&gt;getCode($field));
-            };
+            <span class="c1">// For each captcha control we need to store the captcha value,</span>
+            <span class="c1">// retreived from the session, in the corresponding model field so</span>
+            <span class="c1">// that it can be validated.</span>
+            <span class="k">foreach</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">captchas</span> <span class="k">as</span> <span class="nv">$field</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Contact</span><span class="o">-&gt;</span><span class="na">setCaptcha</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span>
+                    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Captcha</span><span class="o">-&gt;</span><span class="na">getCode</span><span class="p">(</span><span class="nv">$field</span><span class="p">));</span>
+            <span class="p">};</span>
 
-            $this-&gt;Contact-&gt;set($this-&gt;request-&gt;data);
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Contact</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
 
-            if ($this-&gt;Contact-&gt;validates()) {
-                $this-&gt;Session-&gt;setFlash('Captcha codes validated successfully',
-                    'flash_good');
-            }
-        }
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Contact</span><span class="o">-&gt;</span><span class="na">validates</span><span class="p">())</span> <span class="p">{</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">'Captcha codes validated successfully'</span><span class="p">,</span>
+                    <span class="s1">'flash_good'</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
 
-        // Store configured captcha controls in view for rendering
-        $this-&gt;set('captcha_fields', $this-&gt;captchas);
-    }
-}
-?&gt;
-</code></pre>
+        <span class="c1">// Store configured captcha controls in view for rendering</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'captcha_fields'</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">captchas</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
 
 <p>Route Config/routes.php</p>
 
-<pre><code>Router::connect('/img/captcha.jpg', array('controller' =&gt; 'contacts', 'action' =&gt; 'captcha'));
-Router::connect('/img/captcha-2.jpg', array('controller' =&gt; 'contacts', 'action' =&gt; 'captcha'));
-</code></pre>
+<div class="highlight highlight-php"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span><span class="s1">'/img/captcha.jpg'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'controller'</span> <span class="o">=&gt;</span> <span class="s1">'contacts'</span><span class="p">,</span> <span class="s1">'action'</span> <span class="o">=&gt;</span> <span class="s1">'captcha'</span><span class="p">));</span>
+<span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span><span class="s1">'/img/captcha-2.jpg'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'controller'</span> <span class="o">=&gt;</span> <span class="s1">'contacts'</span><span class="p">,</span> <span class="s1">'action'</span> <span class="o">=&gt;</span> <span class="s1">'captcha'</span><span class="p">));</span>
+</pre></div>
 
 <p>View Contacts/index.ctp</p>
 
-<pre><code>&lt;?php
-    echo $this-&gt;Form-&gt;create('Contact');
-    // For each configured captcha control, render the captcha image +
-    // text input element + reload link
-    foreach($captcha_fields as $index =&gt; $captcha) {
-        echo $this-&gt;Html-&gt;image($captcha . '.jpg', array('id' =&gt; $captcha));
-        echo $this-&gt;Html-&gt;link('reload image &amp;#x21bb;', '#', array('class' =&gt; 'reload', 'escape' =&gt; false));
-        echo $this-&gt;Form-&gt;input($captcha, array('label' =&gt; 'Captcha', 'value' =&gt; '', 'tabindex' =&gt; $index + 1)); 
-    }
-    echo $this-&gt;Form-&gt;end('Submit');
-?&gt;
-</code></pre>
+<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+    <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">'Contact'</span><span class="p">);</span>
+    <span class="c1">// For each configured captcha control, render the captcha image +</span>
+    <span class="c1">// text input element + reload link</span>
+    <span class="k">foreach</span><span class="p">(</span><span class="nv">$captcha_fields</span> <span class="k">as</span> <span class="nv">$index</span> <span class="o">=&gt;</span> <span class="nv">$captcha</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">(</span><span class="nv">$captcha</span> <span class="o">.</span> <span class="s1">'.jpg'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="nv">$captcha</span><span class="p">));</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span><span class="s1">'reload image &amp;#x21bb;'</span><span class="p">,</span> <span class="s1">'#'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'class'</span> <span class="o">=&gt;</span> <span class="s1">'reload'</span><span class="p">,</span> <span class="s1">'escape'</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="nv">$captcha</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'label'</span> <span class="o">=&gt;</span> <span class="s1">'Captcha'</span><span class="p">,</span> <span class="s1">'value'</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span> <span class="s1">'tabindex'</span> <span class="o">=&gt;</span> <span class="nv">$index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">'Submit'</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
 
 <h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
-<p>Licensed under The MIT License<br>
-Redistributions of files must retain the above copyright notice.</p>
-
-<h2>
+<ul>
+<li>Licensed under The MIT License</li>
+<li>Redistributions of files must retain the above copyright notice.</li>
+<li><a href="http://opensource.org/licenses/MIT">http://opensource.org/licenses/MIT</a></li>
+</ul><h2>
 <a name="copyright" class="anchor" href="#copyright"><span class="octicon octicon-link"></span></a>Copyright</h2>
 
 <p>Copyright (C) Donovan du Plessis, <a href="mailto:donovan@binarytrooper.com">donovan@binarytrooper.com</a></p>
@@ -250,16 +258,20 @@ Redistributions of files must retain the above copyright notice.</p>
 
 <ul>
 <li>Add support for theme colour configurations</li>
+<li>Add support for multiple captch types <code>alpha|math</code>
+</li>
 </ul><h5>
 <a name="17-jun-24-2014" class="anchor" href="#17-jun-24-2014"><span class="octicon octicon-link"></span></a>1.7 [Jun 24, 2014]</h5>
 
 <ul>
-<li>Output image data in repsonse body correctly (YLK)</li>
+<li>Output image data in repsonse body correctly <code>(YLK)</code>
+</li>
 </ul><h5>
 <a name="16-jun-04-2014" class="anchor" href="#16-jun-04-2014"><span class="octicon octicon-link"></span></a>1.6 [Jun 04, 2014]</h5>
 
 <ul>
-<li>Add support for multiple captchas per form (mubasshir request)</li>
+<li>Add support for multiple captchas per form <code>(mubasshir request)</code>
+</li>
 </ul><h5>
 <a name="15-aug-05-2013" class="anchor" href="#15-aug-05-2013"><span class="octicon octicon-link"></span></a>1.5 [Aug 05, 2013]</h5>
 
@@ -276,12 +288,14 @@ Redistributions of files must retain the above copyright notice.</p>
 
 <ul>
 <li>Set font path to Lib/Fonts (ALR)</li>
-<li>Access Model reference correctly in Behavior (ALR)</li>
+<li>Access Model reference correctly in Behavior <code>(ALR)</code>
+</li>
 </ul><h5>
 <a name="12-oct-17-2012" class="anchor" href="#12-oct-17-2012"><span class="octicon octicon-link"></span></a>1.2 [Oct 17, 2012]</h5>
 
 <ul>
-<li>Set component and behavior to framework 2.0 compliant (ALR)</li>
+<li>Set component and behavior to framework 2.0 compliant <code>(ALR)</code>
+</li>
 </ul><h5>
 <a name="11-apr-18-2012" class="anchor" href="#11-apr-18-2012"><span class="octicon octicon-link"></span></a>1.1 [Apr 18, 2012]</h5>
 
