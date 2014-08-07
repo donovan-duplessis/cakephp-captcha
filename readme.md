@@ -16,10 +16,11 @@ Features:
 
 [captcha.baselocker.com](http://captcha.baselocker.com)
 
-**example (randomized on page load):**
+```examples (random alpha|math on page load):```
 
 ![alt captcha](http://captcha.baselocker.com/captchas/captcha.jpg "Captcha")&nbsp;
-![alt captcha](http://captcha.baselocker.com/captchas/captcha-2.jpg "Captcha")
+![alt captcha](http://captcha.baselocker.com/captchas/captcha-2.jpg "Captcha")&nbsp;
+![alt captcha](http://captcha.baselocker.com/captchas/captcha-3.jpg "Captcha")
 
 ## Requirements
 
