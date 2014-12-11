@@ -10,7 +10,7 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @category    Behavior
- * @version     1.4
+ * @version     1.5
  * @author      Donovan du Plessis <donovan@binarytrooper.com>
  * @copyright   Copyright (C) Donovan du Plessis
  * @license     MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -21,7 +21,8 @@
  * 2012-04-19  DdP  Extract default configuration settings into class variable
  * 2012-10-09  ALR  Change class to extend ModelBehavior (2.0 compliant)
  * 2012-10-25  ALR  Access Model reference correctly
- * 2014-06-04  Ddp  Add support for multiple captcha instantiations
+ * 2014-06-04  DdP  Add support for multiple captcha instantiations
+ * 2014-12-11  DdP  Fix beforeValidate method declaration (strict #9)
  *
  */
 App::uses('ModelBehavior', 'Model');
@@ -91,7 +92,7 @@ class CaptchaBehavior extends ModelBehavior
      * (non-PHPdoc)
      * @see ModelBehavior::beforeValidate()
      */
-    public function beforeValidate(Model $model) {
+    public function beforeValidate(Model $model, $options = array())  {
         $validator = array(
             'rule' => array('verifyCaptcha'),
             'message' => $this->settings[$model->alias]['error']
