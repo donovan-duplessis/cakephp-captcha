@@ -1,38 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Cakephp Captcha : Captcha implementation for CakePHP 2.2+" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Cakephp Captcha by donovan-duplessis</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <title>Cakephp Captcha</title>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/donovan-duplessis/cakephp-captcha">View on GitHub</a>
-
-          <h1 id="project_title">Cakephp Captcha</h1>
-          <h2 id="project_tagline">Captcha implementation for CakePHP 2.2+</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/donovan-duplessis/cakephp-captcha/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/donovan-duplessis/cakephp-captcha/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+    <div class="wrapper">
+      <header>
+        <h1>Cakephp Captcha</h1>
+        <p>Captcha implementation for CakePHP 2.2+</p>
+        <p class="view"><a href="https://github.com/donovan-duplessis/cakephp-captcha">View the Project on GitHub <small>donovan-duplessis/cakephp-captcha</small></a></p>
+        <ul>
+          <li><a href="https://github.com/donovan-duplessis/cakephp-captcha/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/donovan-duplessis/cakephp-captcha/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/donovan-duplessis/cakephp-captcha">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
         <h1>
-<a name="captcha-support-for-cakephp-22" class="anchor" href="#captcha-support-for-cakephp-22"><span class="octicon octicon-link"></span></a>Captcha support for CakePHP 2.2+</h1>
+<a id="captcha-support-for-cakephp-22" class="anchor" href="#captcha-support-for-cakephp-22" aria-hidden="true"><span class="octicon octicon-link"></span></a>Captcha support for CakePHP 2.2+</h1>
 
 <p>Generates an image with random text <code>alpha|math</code> which requires a human to validate.  This is to prevent automated spam and spam bots.</p>
 
@@ -49,278 +45,296 @@
 <li>Multiple captchas allowed per form</li>
 <li>Theme colour profiles <code>default|random|green|red|blue</code>
 </li>
-</ul><h2>
-<a name="demonstration" class="anchor" href="#demonstration"><span class="octicon octicon-link"></span></a>Demonstration</h2>
+</ul>
+
+<h2>
+<a id="demonstration" class="anchor" href="#demonstration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demonstration</h2>
 
 <p><a href="http://captcha.baselocker.com">captcha.baselocker.com</a></p>
 
-<p><strong>example (randomized on page load):</strong></p>
+<p><code>examples (random alpha|math on page load):</code></p>
 
 <p><img src="http://captcha.baselocker.com/captchas/captcha.jpg" alt="alt captcha" title="Captcha"> 
-<img src="http://captcha.baselocker.com/captchas/captcha-2.jpg" alt="alt captcha" title="Captcha"></p>
+<img src="http://captcha.baselocker.com/captchas/captcha-2.jpg" alt="alt captcha" title="Captcha"> 
+<img src="http://captcha.baselocker.com/captchas/captcha-3.jpg" alt="alt captcha" title="Captcha"></p>
 
 <h2>
-<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
 <ul>
 <li>PHP version: 5.2+</li>
 <li>CakePHP version: 2.0+</li>
-</ul><h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>Clone or download the component:</p>
 
-<div class="highlight highlight-bash"><pre>git clone git://github.com/donovan-duplessis/cakephp-captcha.git
-</pre></div>
+<div class="highlight highlight-bash"><pre>git clone git://github.com/donovan-duplessis/cakephp-captcha.git</pre></div>
 
 <p>Copy the component and behavior into your framework at:</p>
 
-<div class="highlight highlight-bash"><pre><span class="nb">cd </span>cakephp-captcha
-cp Controller/Component/CaptchaComponent.php &lt;your-app&gt;/app/Controller/Component/
-cp Model/Behavior/CaptchaBehavior.php &lt;your-app&gt;/app/Model/Behavior/
-</pre></div>
+<div class="highlight highlight-bash"><pre><span class="pl-s3">cd</span> cakephp-captcha
+cp Controller/Component/CaptchaComponent.php <span class="pl-k">&lt;</span>your-app<span class="pl-k">&gt;</span>/app/Controller/Component/
+cp Model/Behavior/CaptchaBehavior.php <span class="pl-k">&lt;</span>your-app<span class="pl-k">&gt;</span>/app/Model/Behavior/</pre></div>
 
 <p>Copy the fonts into your framework at:</p>
 
-<div class="highlight highlight-bash"><pre>cp -R Lib/Fonts &lt;your-app&gt;/app/Lib/
-chmod <span class="m">755</span> &lt;your-app&gt;/app/Lib/Fonts
-</pre></div>
+<div class="highlight highlight-bash"><pre>cp -R Lib/Fonts <span class="pl-k">&lt;</span>your-app<span class="pl-k">&gt;</span>/app/Lib/
+chmod 755 <span class="pl-k">&lt;</span>your-app<span class="pl-k">&gt;</span>/app/Lib/Fonts</pre></div>
 
 <p>GD library needs to be installed for PHP (for dynamic image creation):</p>
 
 <p>Ubuntu</p>
 
-<div class="highlight highlight-bash"><pre>sudo apt-get install php5-gd
-</pre></div>
+<div class="highlight highlight-bash"><pre>sudo apt-get install php5-gd</pre></div>
 
 <p>Mac OSX (MacPorts)</p>
 
-<div class="highlight highlight-bash"><pre>sudo port install php5-gd
-</pre></div>
+<div class="highlight highlight-bash"><pre>sudo port install php5-gd</pre></div>
 
 <h2>
-<a name="errors" class="anchor" href="#errors"><span class="octicon octicon-link"></span></a>Errors</h2>
+<a id="errors" class="anchor" href="#errors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Errors</h2>
 
 <p>e.g. "Call to undefined function imagecreatetruecolor ()"</p>
 
 <p>Install php5-gd library as described above</p>
 
 <h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <p>Include Captcha behavior in model:<br></p>
 
-<div class="highlight highlight-php"><pre><span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'Captcha'</span><span class="p">);</span>
-</pre></div>
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-s">public</span> <span class="pl-vo">$actsAs</span> <span class="pl-k">=</span> <span class="pl-s3">array</span>(<span class="pl-s1"><span class="pl-pds">'</span>Captcha<span class="pl-pds">'</span></span>);</span></pre></div>
 
 <p>Include Captcha component in controller:</p>
 
-<div class="highlight highlight-php"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'Captcha'</span><span class="p">);</span>
-</pre></div>
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-s">public</span> <span class="pl-vo">$components</span> <span class="pl-k">=</span> <span class="pl-s3">array</span>(<span class="pl-s1"><span class="pl-pds">'</span>Captcha<span class="pl-pds">'</span></span>);</span></pre></div>
 
 <p>To output the captcha image from controller:</p>
 
-<div class="highlight highlight-php"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Captcha</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">();</span>
-</pre></div>
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">Captcha</span><span class="pl-k">-&gt;</span>generate();</span></pre></div>
 
 <h2>
-<a name="reload-image" class="anchor" href="#reload-image"><span class="octicon octicon-link"></span></a>Reload image</h2>
+<a id="reload-image" class="anchor" href="#reload-image" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reload image</h2>
 
 <p>Refer to sample code (mostly in contacts index view) which refreshes the captcha image via jQuery.</p>
 
 <h2>
-<a name="authentication" class="anchor" href="#authentication"><span class="octicon octicon-link"></span></a>Authentication</h2>
+<a id="authentication" class="anchor" href="#authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authentication</h2>
 
 <p>If you are using the authentication component, ensure that the captcha action (that generates the image) is granted access.</p>
 
 <h2>
-<a name="sample-code" class="anchor" href="#sample-code"><span class="octicon octicon-link"></span></a>Sample Code</h2>
+<a id="sample-code" class="anchor" href="#sample-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sample Code</h2>
 
 <p>Model Contact.php</p>
 
-<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
-<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">'AppModel'</span><span class="p">,</span> <span class="s1">'Model'</span><span class="p">);</span>
-<span class="k">class</span> <span class="nc">Contact</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
-    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'Captcha'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-            <span class="c1">// We will be handling 2 captcha controls on the form</span>
-            <span class="s1">'field'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'captcha'</span><span class="p">,</span> <span class="s1">'captcha-2'</span><span class="p">),</span>
-            <span class="s1">'error'</span> <span class="o">=&gt;</span> <span class="s1">'Captcha code entered invalid'</span>
-        <span class="p">)</span>
-    <span class="p">);</span>
-<span class="p">}</span>
-<span class="cp">?&gt;</span><span class="x"></span>
-</pre></div>
+<div class="highlight highlight-php"><pre><span class="pl-pse">&lt;?php</span><span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-s3">App</span><span class="pl-k">::</span>uses(<span class="pl-s1"><span class="pl-pds">'</span>AppModel<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>Model<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2"><span class="pl-st">class</span> <span class="pl-en">Contact</span> <span class="pl-s">extends</span> <span class="pl-e">AppModel</span> {</span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-vo">$actsAs</span> <span class="pl-k">=</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>Captcha<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">            <span class="pl-c">// We will be handling 2 captcha controls on the form</span></span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>field<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(<span class="pl-s1"><span class="pl-pds">'</span>captcha<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>captcha-2<span class="pl-pds">'</span></span>),</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>error<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>Captcha code entered invalid<span class="pl-pds">'</span></span></span>
+<span class="pl-s2">        )</span>
+<span class="pl-s2">    );</span>
+<span class="pl-s2">}</span>
+<span class="pl-s2"></span><span class="pl-pse"><span class="pl-s2">?</span>&gt;</span></pre></div>
 
 <p>Controller ContactsController.php</p>
 
-<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
-<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">'AppController'</span><span class="p">,</span> <span class="s1">'Controller'</span><span class="p">);</span>
-
-<span class="k">class</span> <span class="nc">ContactsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
-
-    <span class="c1">// Keep track of the two captcha controls, each captcha store/verify</span>
-    <span class="c1">// will be kept in its own session variable.</span>
-    <span class="k">public</span> <span class="nv">$captchas</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'captcha'</span><span class="p">,</span> <span class="s1">'captcha-2'</span><span class="p">);</span>
-
-    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'Captcha'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-            <span class="s1">'type'</span>   <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'alpha'</span><span class="p">,</span> <span class="s1">'math'</span><span class="p">),</span>
-            <span class="s1">'rotate'</span> <span class="o">=&gt;</span> <span class="k">true</span>
-            <span class="s1">'theme'</span>  <span class="o">=&gt;</span> <span class="s1">'random'</span>
-        <span class="p">),</span>
-        <span class="s1">'RequestHandler'</span>
-    <span class="p">);</span>
-
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">captcha</span><span class="p">()</span>  <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">autoRender</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
-
-        <span class="c1">// Retrieve the basename for the image route so that we can</span>
-        <span class="c1">// uniquely identify and generate each captcha control.</span>
-        <span class="nv">$captcha</span> <span class="o">=</span> <span class="nb">basename</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">'url'</span><span class="p">][</span><span class="s1">'url'</span><span class="p">],</span> <span class="s1">'.jpg'</span><span class="p">);</span>
-
-        <span class="c1">/// Generate actual captcha image (each image unique per image route)</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Captcha</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">(</span><span class="nv">$captcha</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">RequestHandler</span><span class="o">-&gt;</span><span class="na">isPost</span><span class="p">())</span> <span class="p">{</span>
-
-            <span class="c1">// For each captcha control we need to store the captcha value,</span>
-            <span class="c1">// retreived from the session, in the corresponding model field so</span>
-            <span class="c1">// that it can be validated.</span>
-            <span class="k">foreach</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">captchas</span> <span class="k">as</span> <span class="nv">$field</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Contact</span><span class="o">-&gt;</span><span class="na">setCaptcha</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span>
-                    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Captcha</span><span class="o">-&gt;</span><span class="na">getCode</span><span class="p">(</span><span class="nv">$field</span><span class="p">));</span>
-            <span class="p">};</span>
-
-            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Contact</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Contact</span><span class="o">-&gt;</span><span class="na">validates</span><span class="p">())</span> <span class="p">{</span>
-                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">'Captcha codes validated successfully'</span><span class="p">,</span>
-                    <span class="s1">'flash_good'</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="c1">// Store configured captcha controls in view for rendering</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'captcha_fields'</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">captchas</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="cp">?&gt;</span><span class="x"></span>
-</pre></div>
+<div class="highlight highlight-php"><pre><span class="pl-pse">&lt;?php</span><span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-s3">App</span><span class="pl-k">::</span>uses(<span class="pl-s1"><span class="pl-pds">'</span>AppController<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>Controller<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-st">class</span> <span class="pl-en">ContactsController</span> <span class="pl-s">extends</span> <span class="pl-e">AppController</span> {</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">// Keep track of the two captcha controls, each captcha store/verify</span></span>
+<span class="pl-s2">    <span class="pl-c">// will be kept in its own session variable.</span></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-vo">$captchas</span> <span class="pl-k">=</span> <span class="pl-s3">array</span>(<span class="pl-s1"><span class="pl-pds">'</span>captcha<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>captcha-2<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-vo">$components</span> <span class="pl-k">=</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>Captcha<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span>   <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(<span class="pl-s1"><span class="pl-pds">'</span>alpha<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>math<span class="pl-pds">'</span></span>),</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>rotate<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">true</span></span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>theme<span class="pl-pds">'</span></span>  <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>random<span class="pl-pds">'</span></span></span>
+<span class="pl-s2">        ),</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>RequestHandler<span class="pl-pds">'</span></span></span>
+<span class="pl-s2">    );</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">captcha</span>()  {</span>
+<span class="pl-s2">        <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">autoRender</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-c">// Retrieve the basename for the image route so that we can</span></span>
+<span class="pl-s2">        <span class="pl-c">// uniquely identify and generate each captcha control.</span></span>
+<span class="pl-s2">        <span class="pl-vo">$captcha</span> <span class="pl-k">=</span> <span class="pl-s3">basename</span>(<span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">params</span>[<span class="pl-s1"><span class="pl-pds">'</span>url<span class="pl-pds">'</span></span>][<span class="pl-s1"><span class="pl-pds">'</span>url<span class="pl-pds">'</span></span>], <span class="pl-s1"><span class="pl-pds">'</span>.jpg<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-c">/// Generate actual captcha image (each image unique per image route)</span></span>
+<span class="pl-s2">        <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">Captcha</span><span class="pl-k">-&gt;</span>generate(<span class="pl-vo">$captcha</span>);</span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">index</span>() {</span>
+<span class="pl-s2">        <span class="pl-k">if</span> (<span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">RequestHandler</span><span class="pl-k">-&gt;</span>isPost()) {</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">            <span class="pl-c">// For each captcha control we need to store the captcha value,</span></span>
+<span class="pl-s2">            <span class="pl-c">// retreived from the session, in the corresponding model field so</span></span>
+<span class="pl-s2">            <span class="pl-c">// that it can be validated.</span></span>
+<span class="pl-s2">            <span class="pl-k">foreach</span>(<span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">captchas</span> <span class="pl-k">as</span> <span class="pl-vo">$field</span>) {</span>
+<span class="pl-s2">                <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">Contact</span><span class="pl-k">-&gt;</span>setCaptcha(<span class="pl-vo">$field</span>,</span>
+<span class="pl-s2">                    <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">Captcha</span><span class="pl-k">-&gt;</span>getCode(<span class="pl-vo">$field</span>));</span>
+<span class="pl-s2">            };</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">            <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">Contact</span><span class="pl-k">-&gt;</span>set(<span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">request</span><span class="pl-k">-&gt;</span><span class="pl-vo">data</span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">            <span class="pl-k">if</span> (<span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">Contact</span><span class="pl-k">-&gt;</span>validates()) {</span>
+<span class="pl-s2">                <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">Session</span><span class="pl-k">-&gt;</span>setFlash(<span class="pl-s1"><span class="pl-pds">'</span>Captcha codes validated successfully<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">                    <span class="pl-s1"><span class="pl-pds">'</span>flash_good<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2">            }</span>
+<span class="pl-s2">        }</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-c">// Store configured captcha controls in view for rendering</span></span>
+<span class="pl-s2">        <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span>set(<span class="pl-s1"><span class="pl-pds">'</span>captcha_fields<span class="pl-pds">'</span></span>, <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">captchas</span>);</span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2">}</span>
+<span class="pl-s2"></span><span class="pl-pse"><span class="pl-s2">?</span>&gt;</span></pre></div>
 
 <p>Route Config/routes.php</p>
 
-<div class="highlight highlight-php"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span><span class="s1">'/img/captcha.jpg'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'controller'</span> <span class="o">=&gt;</span> <span class="s1">'contacts'</span><span class="p">,</span> <span class="s1">'action'</span> <span class="o">=&gt;</span> <span class="s1">'captcha'</span><span class="p">));</span>
-<span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span><span class="s1">'/img/captcha-2.jpg'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'controller'</span> <span class="o">=&gt;</span> <span class="s1">'contacts'</span><span class="p">,</span> <span class="s1">'action'</span> <span class="o">=&gt;</span> <span class="s1">'captcha'</span><span class="p">));</span>
-</pre></div>
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-s3">Router</span><span class="pl-k">::</span>connect(<span class="pl-s1"><span class="pl-pds">'</span>/img/captcha.jpg<span class="pl-pds">'</span></span>, <span class="pl-s3">array</span>(<span class="pl-s1"><span class="pl-pds">'</span>controller<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>contacts<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>action<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>captcha<span class="pl-pds">'</span></span>));</span>
+<span class="pl-s2"><span class="pl-s3">Router</span><span class="pl-k">::</span>connect(<span class="pl-s1"><span class="pl-pds">'</span>/img/captcha-2.jpg<span class="pl-pds">'</span></span>, <span class="pl-s3">array</span>(<span class="pl-s1"><span class="pl-pds">'</span>controller<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>contacts<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>action<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>captcha<span class="pl-pds">'</span></span>));</span></pre></div>
 
 <p>View Contacts/index.ctp</p>
 
-<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
-    <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">'Contact'</span><span class="p">);</span>
-    <span class="c1">// For each configured captcha control, render the captcha image +</span>
-    <span class="c1">// text input element + reload link</span>
-    <span class="k">foreach</span><span class="p">(</span><span class="nv">$captcha_fields</span> <span class="k">as</span> <span class="nv">$index</span> <span class="o">=&gt;</span> <span class="nv">$captcha</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">(</span><span class="nv">$captcha</span> <span class="o">.</span> <span class="s1">'.jpg'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="nv">$captcha</span><span class="p">));</span>
-        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span><span class="s1">'reload image &amp;#x21bb;'</span><span class="p">,</span> <span class="s1">'#'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'class'</span> <span class="o">=&gt;</span> <span class="s1">'reload'</span><span class="p">,</span> <span class="s1">'escape'</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
-        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="nv">$captcha</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'label'</span> <span class="o">=&gt;</span> <span class="s1">'Captcha'</span><span class="p">,</span> <span class="s1">'value'</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span> <span class="s1">'tabindex'</span> <span class="o">=&gt;</span> <span class="nv">$index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
-    <span class="p">}</span>
-    <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">'Submit'</span><span class="p">);</span>
-<span class="cp">?&gt;</span><span class="x"></span>
-</pre></div>
+<div class="highlight highlight-php"><pre><span class="pl-pse">&lt;?php</span><span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-s3">echo</span> <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">Form</span><span class="pl-k">-&gt;</span>create(<span class="pl-s1"><span class="pl-pds">'</span>Contact<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2">    <span class="pl-c">// For each configured captcha control, render the captcha image +</span></span>
+<span class="pl-s2">    <span class="pl-c">// text input element + reload link</span></span>
+<span class="pl-s2">    <span class="pl-k">foreach</span>(<span class="pl-vo">$captcha_fields</span> <span class="pl-k">as</span> <span class="pl-vo">$index</span> <span class="pl-k">=&gt;</span> <span class="pl-vo">$captcha</span>) {</span>
+<span class="pl-s2">        <span class="pl-s3">echo</span> <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">Html</span><span class="pl-k">-&gt;</span>image(<span class="pl-vo">$captcha</span> <span class="pl-k">.</span> <span class="pl-s1"><span class="pl-pds">'</span>.jpg<span class="pl-pds">'</span></span>, <span class="pl-s3">array</span>(<span class="pl-s1"><span class="pl-pds">'</span>id<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-vo">$captcha</span>));</span>
+<span class="pl-s2">        <span class="pl-s3">echo</span> <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">Html</span><span class="pl-k">-&gt;</span>link(<span class="pl-s1"><span class="pl-pds">'</span>reload image &amp;#x21bb;<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>#<span class="pl-pds">'</span></span>, <span class="pl-s3">array</span>(<span class="pl-s1"><span class="pl-pds">'</span>class<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>reload<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>escape<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">false</span>));</span>
+<span class="pl-s2">        <span class="pl-s3">echo</span> <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">Form</span><span class="pl-k">-&gt;</span>input(<span class="pl-vo">$captcha</span>, <span class="pl-s3">array</span>(<span class="pl-s1"><span class="pl-pds">'</span>label<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>Captcha<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>value<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>tabindex<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-vo">$index</span> <span class="pl-k">+</span> <span class="pl-c1">1</span>));</span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2">    <span class="pl-s3">echo</span> <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">Form</span><span class="pl-k">-&gt;</span>end(<span class="pl-s1"><span class="pl-pds">'</span>Submit<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2"></span><span class="pl-pse"><span class="pl-s2">?</span>&gt;</span></pre></div>
 
 <h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <ul>
 <li>Licensed under The MIT License</li>
 <li>Redistributions of files must retain the above copyright notice.</li>
 <li><a href="http://opensource.org/licenses/MIT">http://opensource.org/licenses/MIT</a></li>
-</ul><h2>
-<a name="copyright" class="anchor" href="#copyright"><span class="octicon octicon-link"></span></a>Copyright</h2>
+</ul>
+
+<h2>
+<a id="copyright" class="anchor" href="#copyright" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copyright</h2>
 
 <p>Copyright (C) Donovan du Plessis, <a href="mailto:donovan@binarytrooper.com">donovan@binarytrooper.com</a></p>
 
 <h2>
-<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
+<a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributors</h2>
 
 <ul>
 <li>Adriano Luís Rocha (ALR), <a href="https://github.com/adrianoluis">adrianlouis</a>
 </li>
 <li>Yanosh Kunsh (YLK), <a href="https://github.com/yanosh-kunsh">yanosh-kunsh</a>
 </li>
-</ul><h2>
-<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>Changelog</h2>
+</ul>
+
+<h2>
+<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changelog</h2>
 
 <h5>
-<a name="18-jun-25-2014" class="anchor" href="#18-jun-25-2014"><span class="octicon octicon-link"></span></a>1.8 [Jun 25, 2014]</h5>
+<a id="18-jun-25-2014" class="anchor" href="#18-jun-25-2014" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.8 [Jun 25, 2014]</h5>
 
 <ul>
 <li>Add support for theme colour configurations</li>
 <li>Add support for multiple captch types <code>alpha|math</code>
 </li>
-</ul><h5>
-<a name="17-jun-24-2014" class="anchor" href="#17-jun-24-2014"><span class="octicon octicon-link"></span></a>1.7 [Jun 24, 2014]</h5>
+</ul>
+
+<h5>
+<a id="17-jun-24-2014" class="anchor" href="#17-jun-24-2014" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.7 [Jun 24, 2014]</h5>
 
 <ul>
 <li>Output image data in repsonse body correctly <code>(YLK)</code>
 </li>
-</ul><h5>
-<a name="16-jun-04-2014" class="anchor" href="#16-jun-04-2014"><span class="octicon octicon-link"></span></a>1.6 [Jun 04, 2014]</h5>
+</ul>
+
+<h5>
+<a id="16-jun-04-2014" class="anchor" href="#16-jun-04-2014" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.6 [Jun 04, 2014]</h5>
 
 <ul>
 <li>Add support for multiple captchas per form <code>(mubasshir request)</code>
 </li>
-</ul><h5>
-<a name="15-aug-05-2013" class="anchor" href="#15-aug-05-2013"><span class="octicon octicon-link"></span></a>1.5 [Aug 05, 2013]</h5>
+</ul>
+
+<h5>
+<a id="15-aug-05-2013" class="anchor" href="#15-aug-05-2013" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.5 [Aug 05, 2013]</h5>
 
 <ul>
 <li>Add reload captcha image implementation to contacts sample code</li>
-</ul><h5>
-<a name="14-jun-19-2013" class="anchor" href="#14-jun-19-2013"><span class="octicon octicon-link"></span></a>1.4 [Jun 19, 2013]</h5>
+</ul>
+
+<h5>
+<a id="14-jun-19-2013" class="anchor" href="#14-jun-19-2013" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.4 [Jun 19, 2013]</h5>
 
 <ul>
 <li>Add initialize method to component to set correct image response type and body</li>
 <li>Refactor readme document and script comments</li>
-</ul><h5>
-<a name="13-oct-25-2012" class="anchor" href="#13-oct-25-2012"><span class="octicon octicon-link"></span></a>1.3 [Oct 25, 2012]</h5>
+</ul>
+
+<h5>
+<a id="13-oct-25-2012" class="anchor" href="#13-oct-25-2012" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3 [Oct 25, 2012]</h5>
 
 <ul>
 <li>Set font path to Lib/Fonts (ALR)</li>
 <li>Access Model reference correctly in Behavior <code>(ALR)</code>
 </li>
-</ul><h5>
-<a name="12-oct-17-2012" class="anchor" href="#12-oct-17-2012"><span class="octicon octicon-link"></span></a>1.2 [Oct 17, 2012]</h5>
+</ul>
+
+<h5>
+<a id="12-oct-17-2012" class="anchor" href="#12-oct-17-2012" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.2 [Oct 17, 2012]</h5>
 
 <ul>
 <li>Set component and behavior to framework 2.0 compliant <code>(ALR)</code>
 </li>
-</ul><h5>
-<a name="11-apr-18-2012" class="anchor" href="#11-apr-18-2012"><span class="octicon octicon-link"></span></a>1.1 [Apr 18, 2012]</h5>
+</ul>
+
+<h5>
+<a id="11-apr-18-2012" class="anchor" href="#11-apr-18-2012" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.1 [Apr 18, 2012]</h5>
 
 <ul>
 <li>Add character limit configuration to component</li>
 <li>Initial default configuration settings in Behavior</li>
 <li>Refactor code and readme document</li>
-</ul><h5>
-<a name="10-mar-29-2012" class="anchor" href="#10-mar-29-2012"><span class="octicon octicon-link"></span></a>1.0 [Mar 29, 2012]</h5>
+</ul>
+
+<h5>
+<a id="10-mar-29-2012" class="anchor" href="#10-mar-29-2012" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.0 [Mar 29, 2012]</h5>
 
 <ul>
 <li>Initial Version</li>
 </ul>
       </section>
     </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Cakephp Captcha maintained by <a href="https://github.com/donovan-duplessis">donovan-duplessis</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
+    <footer>
+      <p>Project maintained by <a href="https://github.com/donovan-duplessis">donovan-duplessis</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-57563623-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
 
   </body>
 </html>
